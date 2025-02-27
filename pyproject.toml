@@ -1,0 +1,5 @@
+[project]
+name = "cozinha-core"
+version = "0.0.1"
+dependencies = []
+requires-python = ">= 3.11"
