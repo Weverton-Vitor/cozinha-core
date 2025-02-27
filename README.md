@@ -42,7 +42,7 @@ pip install .
 Para rodar o projeto, utilize o comando:
 
 ```sh
-python3 main.py
+python3 python -m entrypoints.main
 ```
 
 Caso tenha problemas ao executar o entrypoint, verifique se o ambiente virtual está ativado e se o módulo foi instalado corretamente.

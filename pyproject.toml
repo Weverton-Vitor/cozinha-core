@@ -3,3 +3,6 @@ name = "cozinha-core"
 version = "0.0.1"
 dependencies = []
 requires-python = ">= 3.11"
+
+[project.scripts]
+cozinha-core = "entrypoints.main:main"
