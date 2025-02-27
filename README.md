@@ -51,7 +51,7 @@ Caso tenha problemas ao executar o entrypoint, verifique se o ambiente virtual e
 
 Para acessar os diagramas de casos de uso e UML, clique no link abaixo:
 
-[Diagramas de Casos de Uso e UML](#https://drive.google.com/file/d/1PD-h46dLYKkWrz2cV02Bp6aYxtO0HS1s/view?usp=sharing)
+[Diagramas de Casos de Uso e UML](https://drive.google.com/file/d/1PD-h46dLYKkWrz2cV02Bp6aYxtO0HS1s/view?usp=sharing)
 
 ## Contribuição
 
