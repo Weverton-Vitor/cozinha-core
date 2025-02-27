@@ -14,7 +14,7 @@ Cozinha Core é um projeto Python que pode ser instalado como um módulo e execu
 
 ## Requisitos
 
-- Python 3.8+
+- Python 3.11+
 - `pip` e `venv` configurados corretamente
 
 ## Instalação e Execução
