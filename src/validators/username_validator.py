@@ -1,9 +1,8 @@
-from abc import ABC, abstractmethod
 import exceptions
+from validators.interface_username_validator import IUsernameValidator
 
-class IUsernameValidator(ABC):
-    @abstractmethod
-    def validate(username: str) -> bool:
+class UsernameValidator(IUsernameValidator):
+    def validate(self, username: str) -> bool:
         if not username.strip():
             raise exceptions.InvalidUsernameException("O nome de usuário não pode estar vazio.")
         return True

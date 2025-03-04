@@ -11,10 +11,10 @@ class SupplierController:
     def __init__(self, service: services.SuppliersService=None):
         self.__suppliers = []
 
-        if not service:
+        if service is None:
             self.__service = services.SuppliersService(
-                username_validator=validators.IUsernameValidator,
-                password_validator=validators.IPasswordValidator,
+                username_validator=validators.UsernameValidator(),
+                password_validator=validators.PasswordValidator(),
             )
         else:
             self.__service = service

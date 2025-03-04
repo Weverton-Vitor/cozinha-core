@@ -1,10 +1,10 @@
 import re
-from abc import ABC, abstractmethod
 import exceptions
+from validators.interface_password_validator import IPasswordValidator
 
-class IPasswordValidator(ABC):
-    @abstractmethod
-    def validate(password: str) -> bool:
+class PasswordValidator(IPasswordValidator):
+    
+    def validate(self, password: str) -> bool:
         if not (8 <= len(password) <= 64):
             raise exceptions.InvalidPasswordException("A senha deve ter entre 8 e 64 caracteres.")
 
