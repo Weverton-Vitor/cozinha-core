@@ -1,6 +1,7 @@
 import controllers
 import views
 
+
 def main():
     supplier_controller = controllers.SupplierController()
     supplier_view = views.SupplierView(supplier_controller)
@@ -12,8 +13,8 @@ def main():
     supplier_view.create_supplier("Assaí Atacadista", "testeeeeeA2", 1)
     supplier_view.create_supplier("Assaí Atacadista", "testeeeeeA2@", 1)
 
-
     supplier_view.display_suppliers(1)
+
 
 if __name__ == "__main__":
     main()

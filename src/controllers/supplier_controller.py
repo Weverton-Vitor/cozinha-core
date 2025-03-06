@@ -1,39 +1,36 @@
 import entities
-import repositories.in_memory_repository
 import services
 import exceptions
-import validators
 import repositories
+import validators
 
 
 class SupplierController:
     __service: services.SuppliersService
-    __in_memory_repository: repositories.in_memory_repository.InMemoryRepository
+    __repository: repositories.InMemorySuppliersRepository
 
-    def __init__(self, service: services.SuppliersService=None, 
-                 in_memory_repository: repositories.ISuppliersRepository=None):
+    def __init__(self, service: services.SuppliersService = None,
+                 repository: repositories.ISuppliersRepository = None):
 
         if service is None:
             self.__service = services.SuppliersService(
-                username_validator=validators.UsernameValidator(),
-                password_validator=validators.PasswordValidator(),
+                validators.UsernameValidator(),
+                validators.PasswordValidator(),
             )
         else:
             self.__service = service
 
-        if in_memory_repository is None:
-            self.__in_memory_repository = repositories.in_memory_repository.InMemoryRepository()
+        if repository is None:
+            self.__repository = repositories.InMemorySuppliersRepository()
         else:
-            self.__in_memory_repository = in_memory_repository
-
+            self.__repository = repository
 
     def add_supplier(self, name: str, password: str, option: bool):
         try:
             if self.__service.validate_credentials(name, password):
                 sup = entities.Supplier(name, password)
                 if option == 1:
-                    self.__in_memory_repository.create(sup)
-
+                    self.__repository.create(sup)
         except exceptions.InvalidUsernameException as e:
             print(f"Erro de nome de usuário: {e}")
         except exceptions.InvalidPasswordException as e:
@@ -41,4 +38,4 @@ class SupplierController:
 
     def get_suppliers(self, option):
         if option == 1:
-            return self.__in_memory_repository.getAll()
+            return self.__repository.getAll()

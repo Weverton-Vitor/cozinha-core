@@ -1,7 +1,7 @@
 import entities
 from repositories import ISuppliersRepository
 
-class InMemoryRepository(ISuppliersRepository):
+class InMemorySuppliersRepository(ISuppliersRepository):
     __suppliers: list[entities.Supplier]
 
     def __init__(self):
