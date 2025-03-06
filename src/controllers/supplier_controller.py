@@ -25,17 +25,15 @@ class SupplierController:
         else:
             self.__repository = repository
 
-    def add_supplier(self, name: str, password: str, option: bool):
+    def add_supplier(self, name: str, password: str):
         try:
             if self.__service.validate_credentials(name, password):
                 sup = entities.Supplier(name, password)
-                if option == 1:
-                    self.__repository.create(sup)
+                self.__repository.create(sup)
         except exceptions.InvalidUsernameException as e:
             print(f"Erro de nome de usuário: {e}")
         except exceptions.InvalidPasswordException as e:
             print(f"Erro de senha: {e}")
 
-    def get_suppliers(self, option):
-        if option == 1:
-            return self.__repository.getAll()
+    def get_suppliers(self):
+        return self.__repository.getAll()
