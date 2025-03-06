@@ -1,9 +1,9 @@
 import controllers
 import views
-from repositories import SQLiteRepository
+from repositories import SQLiteSupplierRepository
 
 def main():
-    supplier_controller = controllers.SupplierController(repository=SQLiteRepository())
+    supplier_controller = controllers.SupplierController(repository=SQLiteSupplierRepository())
     supplier_view = views.SupplierView(supplier_controller)
 
     supplier_view.create_supplier("Ceasa", "Gf3/@sfsdeasaFsd")

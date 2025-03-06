@@ -3,7 +3,7 @@ from typing import List
 from entities import Supplier
 from repositories import ISuppliersRepository
 
-class SQLiteRepository(ISuppliersRepository):
+class SQLiteSupplierRepository(ISuppliersRepository):
     def __init__(self, db_path: str = 'data/suppliers.db'):
         self.db_path = db_path
         self._initialize_db()
