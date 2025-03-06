@@ -13,7 +13,7 @@ def main():
     supplier_view.create_supplier("Assaí Atacadista", "testeeeeeA2")
     supplier_view.create_supplier("Assaí Atacadista", "testeeeeeA2@")
 
-    supplier_view.display_suppliers(1)
+    supplier_view.display_suppliers()
 
 
 if __name__ == "__main__":
