@@ -7,7 +7,7 @@ import validators
 
 class SupplierController:
     __service: services.SuppliersService
-    __repository: repositories.InMemorySuppliersRepository
+    __repository: repositories.ISuppliersRepository
 
     def __init__(self, service: services.SuppliersService = None,
                  repository: repositories.ISuppliersRepository = None):
