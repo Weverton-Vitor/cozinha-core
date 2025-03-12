@@ -34,6 +34,11 @@ class SupplierController:
             print(f"Erro de nome de usuário: {e}")
         except exceptions.InvalidPasswordException as e:
             print(f"Erro de senha: {e}")
+        except exceptions.PersistenceException as e:
+            print(f"Erro de persistência: {e}")
 
     def get_suppliers(self):
-        return self.__repository.getAll()
+        try:
+            return self.__repository.getAll()
+        except exceptions.PersistenceException as e:
+            print(f"Erro de persistência: {e}")
