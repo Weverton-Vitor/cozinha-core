@@ -176,3 +176,6 @@ cython_debug/
 
 # Os X
 .DS_Store
+
+# DB data
+data/

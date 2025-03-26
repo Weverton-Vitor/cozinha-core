@@ -1,0 +1,2 @@
+class LookupException(Exception):
+    pass
