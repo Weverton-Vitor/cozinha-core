@@ -6,7 +6,6 @@ class SupplierView:
 
     def __init__(self, controller: supplier_controller.SupplierController):
         self.__controller = controller
-        pass
 
     def create_supplier(self, name: str, password: str):
         self.__controller.add_supplier(name, password)

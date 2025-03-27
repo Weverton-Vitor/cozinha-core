@@ -1,1 +1,2 @@
 from .suppliers_service import SuppliersService
+from .kitchens_service import KitchensService

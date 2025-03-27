@@ -9,10 +9,10 @@ import validators
 
 class SupplierController:
     __service: services.SuppliersService
-    __repository: repositories.ISuppliersRepository
+    __repository: repositories.InterfaceRepository
 
     def __init__(self, service: services.SuppliersService = None,
-                 repository: repositories.ISuppliersRepository = None):
+                 repository: repositories.InterfaceRepository = None):
 
         if service is None:
             self.__service = services.SuppliersService(
@@ -39,21 +39,21 @@ class SupplierController:
         except exceptions.PersistenceException as e:
             print(f"Erro de persistência: {e}")
             
-    def update_supplier(self, name: str, supplier: entities.Supplier):
+    def update_supplier(self, identifier: str, supplier: entities.Supplier):
         try:
-            self.__repository.update(name=name, supplier=supplier)
+            self.__repository.update(identifier=identifier, item=supplier)
         except exceptions.PersistenceException as e:
             print(f"Erro de persistência: {e}")
             
-    def get_supplier(self, name: str) -> entities.Supplier:
+    def get_supplier(self, identifier: str) -> entities.Supplier:
         try:
-            return self.__repository.get(name=name)
+            return self.__repository.get(identifier=identifier)
         except exceptions.LookupException as e:
             print(f"Erro de persistência: {e}")
     
-    def delete_supplier(self, name: str) -> entities.Supplier:
+    def delete_supplier(self, identifier: str) -> entities.Supplier:
         try:
-            return self.__repository.delete(name=name)
+            return self.__repository.delete(identifier=identifier)
         except exceptions.DeleteException as e:
             print(f"Erro de persistência: {e}")
 
