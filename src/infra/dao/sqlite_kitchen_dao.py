@@ -1,12 +1,14 @@
+
 import sqlite3
 import exceptions
 from typing import Type, TypeVar, List
 
-from repositories import InterfaceRepository
+from dao import interfaces
 T = TypeVar("T")
 
+# TODO change SQLiteKitchenDAO class implementing of IKitchenDAO interface
 
-class SQLiteRepository(InterfaceRepository):
+class SQLiteKitchenDAO(interfaces.IKitchenDAO):
     def __init__(self, db_path: str, table_name: str, entity_class: Type[T], fields: List[str]):
         self.db_path = db_path
         self.table_name = table_name

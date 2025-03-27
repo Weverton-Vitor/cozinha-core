@@ -1,9 +1,13 @@
+
 from typing import TypeVar, List
-from repositories import InterfaceRepository
+from dao import interfaces
 
 T = TypeVar("T")
 
-class InMemoryRepository(InterfaceRepository):
+
+# TODO change ArrayKitchenDAO class implementing of IKitchenDAO interface
+
+class ArrayKitchenDAO(interfaces.IKitchenDAO):
     def __init__(self):
         self._items: List[T] = []
 
