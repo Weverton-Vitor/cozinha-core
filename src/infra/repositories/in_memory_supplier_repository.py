@@ -1,6 +1,6 @@
-from repositories import interfaces
+from infra import repositories
 
-# TODO write InMemorySuppliersRepository class that implements ISuppliersRepository interface
+# TODO write InMemorySuppliersRepository class that implements ISupplierRepository interface
 
-class InMemorySuppliersRepository(interfaces.ISuppliersRepository):
+class InMemorySuppliersRepository(repositories.interfaces.ISupplierRepository):
     pass
