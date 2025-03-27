@@ -2,7 +2,7 @@ import json
 from controllers import SupplierController, KitchenController
 from repositories import InterfaceRepository
 from entities import Supplier, Kitchen
-from decorators import singleton
+from business.decorators import singleton
 
 @singleton
 class KitchenSupplierFacade:

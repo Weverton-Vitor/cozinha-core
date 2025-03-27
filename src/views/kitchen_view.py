@@ -1,10 +1,10 @@
-from controllers import KitchenController
-from facades import ReportFacaSingController
+from business import controllers
+from business import facades
 
 class KitchenView:
-    __controller_kitchen: KitchenController
+    __controller_kitchen: controllers.KitchenController
 
-    def __init__(self, controller_kitchen: KitchenController):
+    def __init__(self, controller_kitchen: controllers.KitchenController):
         self.__controller_kitchen = controller_kitchen
 
     def create_kitchen(
@@ -28,7 +28,7 @@ class KitchenView:
     def show_message(self, message: str):
         print(message)
 
-    def genereate_report(self, report_facade: ReportFacaSingController):    
+    def genereate_report(self, report_facade: facades.KitchenSupplierFacade):    
         return report_facade.report()
     
 
