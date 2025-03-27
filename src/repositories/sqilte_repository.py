@@ -2,11 +2,11 @@ import sqlite3
 import exceptions
 from typing import Type, TypeVar, List
 
-from repositories import interface_repository
+from repositories import InterfaceRepository
 T = TypeVar("T")
 
 
-class SQLiteRepository(interface_repository.InterfaceRepository):
+class SQLiteRepository(InterfaceRepository):
     def __init__(self, db_path: str, table_name: str, entity_class: Type[T], fields: List[str]):
         self.db_path = db_path
         self.table_name = table_name
