@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 
-import entities
-
+from business import entities
 
 class IKitchenRepository(ABC):
     @abstractmethod
