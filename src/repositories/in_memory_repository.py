@@ -1,9 +1,9 @@
 from typing import TypeVar, List
-from repositories import interface_repository
+from repositories import InterfaceRepository
 
 T = TypeVar("T")
 
-class InMemoryRepository(interface_repository.InterfaceRepository):
+class InMemoryRepository(InterfaceRepository):
     def __init__(self):
         self._items: List[T] = []
 
