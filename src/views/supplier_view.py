@@ -1,12 +1,11 @@
-from controllers import supplier_controller
+from business import controllers
 
 
 class SupplierView:
-    __controller: supplier_controller.SupplierController
+    __controller: controllers.SupplierController
 
-    def __init__(self, controller: supplier_controller.SupplierController):
+    def __init__(self, controller: controllers.SupplierController):
         self.__controller = controller
-        pass
 
     def create_supplier(self, name: str, password: str):
         self.__controller.add_supplier(name, password)

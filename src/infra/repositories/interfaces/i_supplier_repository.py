@@ -1,9 +1,8 @@
 from abc import ABC, abstractmethod
 
-import entities
+from business import entities
 
-
-class ISuppliersRepository(ABC):
+class ISupplierRepository(ABC):
     @abstractmethod
     def create(self, supplier: entities.Supplier) -> None:
         pass
