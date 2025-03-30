@@ -1,32 +1,18 @@
-
 from typing import TypeVar, List
 from dao import interfaces
 
 T = TypeVar("T")
 
 
-# TODO change ArrayKitchenDAO class implementing of IKitchenDAO interface
-
 class ArrayKitchenDAO(interfaces.IKitchenDAO):
     def __init__(self):
         self._items: List[T] = []
 
-    def create(self, item: T) -> None:
-        self._items.append(item)
+    def connect(self):
+        pass  # Nenhuma conexão necessária para armazenamento em memória
 
-    def delete(self, identifier: str) -> None:
-        item_to_delete = next((item for item in self._items if getattr(item, "username", None) == identifier), None)
-        if item_to_delete:
-            self._items.remove(item_to_delete)
+    def query(self, condition=lambda item: True):
+        return [item for item in self._items if condition(item)]
 
-    def update(self, identifier: str, item: T) -> None:
-        for index, existing_item in enumerate(self._items):
-            if getattr(existing_item, "username", None) == identifier:
-                self._items[index] = item
-                return
-
-    def get(self, identifier: str) -> T | None:
-        return next((item for item in self._items if getattr(item, "username", None) == identifier), None)
-
-    def getAll(self) -> List[T]:
-        return self._items
+    def close(self):
+        pass  # Nenhuma conexão para fechar
