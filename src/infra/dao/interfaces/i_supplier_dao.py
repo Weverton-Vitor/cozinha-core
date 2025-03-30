@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from business import entities
+
 
 class InterfaceSupplierDAO(ABC):
     def execute(self):
@@ -12,7 +14,27 @@ class InterfaceSupplierDAO(ABC):
         pass
 
     @abstractmethod
-    def query(self):
+    def query(self, query: str):
+        pass
+
+    @abstractmethod
+    def create(self, supplier: entities.Supplier):
+        pass
+
+    @abstractmethod
+    def delete(self, name: str):
+        pass
+
+    @abstractmethod
+    def update(self, supplier: entities.Supplier):
+        pass
+
+    @abstractmethod
+    def get(self, name: str):
+        pass
+
+    @abstractmethod
+    def getAll(self):
         pass
 
     @abstractmethod

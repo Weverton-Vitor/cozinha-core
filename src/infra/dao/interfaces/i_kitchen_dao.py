@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from business import entities
 
 
 class InterfaceKitchenDAO(ABC):
@@ -12,7 +13,27 @@ class InterfaceKitchenDAO(ABC):
         pass
 
     @abstractmethod
-    def query(self):
+    def query(self, query: str):
+        pass
+
+    @abstractmethod
+    def create(self, kitchen: entities.Kitchen):
+        pass
+
+    @abstractmethod
+    def delete(self, name: str):
+        pass
+
+    @abstractmethod
+    def update(self, kitchen: entities.Kitchen):
+        pass
+
+    @abstractmethod
+    def get(self, name: str):
+        pass
+
+    @abstractmethod
+    def getAll(self):
         pass
 
     @abstractmethod
