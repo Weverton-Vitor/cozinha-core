@@ -4,7 +4,7 @@ from infra import templates
 
 # TODO Add pandas into dependencies
 
-class CsvSystemStatsExporter(templates.interfaces.ReportExporter):
+class CsvSystemStatsExporter(templates.interfaces.SystemStatsReportExporter):
     def preparar_dados(self, dados):
         self.df = pd.DataFrame(dados)
 

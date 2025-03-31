@@ -3,7 +3,7 @@ from infra import templates
 
 # TODO Add pandas into dependencies
 
-class XlsxSystemStatsExporter(templates.interfaces.ReportExporter):
+class XlsxSystemStatsExporter(templates.interfaces.SystemStatsReportExporter):
     def preparar_dados(self, dados):
         self.df = pd.DataFrame(dados)
 

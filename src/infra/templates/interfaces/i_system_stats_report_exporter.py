@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class ReportExporter(ABC):
+class SystemStatsReportExporter(ABC):
     def exportar(self, dados, caminho_arquivo):
         self.preparar_dados(dados)
         self.salvar_arquivo(caminho_arquivo)

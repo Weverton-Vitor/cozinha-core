@@ -3,7 +3,7 @@ from infra import templates
 
 # TODO Add fpdf into dependencies
 
-class PdfSystemStatsExporter(templates.interfaces.ReportExporter):
+class PdfSystemStatsExporter(templates.interfaces.SystemStatsReportExporter):
     def preparar_dados(self, dados):
         self.pdf = FPDF()
         self.pdf.add_page()
