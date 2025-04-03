@@ -6,9 +6,9 @@ from infra import dao
 
 class IDAOFactory(ABC):
     @abstractmethod
-    def get_supplier_repository(self) -> dao.interfaces.ISupplierDAO:
+    def get_supplier_dao(self) -> dao.interfaces.ISupplierDAO:
         pass
 
     @abstractmethod
-    def get_kitchen_repository(self) -> dao.interfaces.IKitchenDAO:
+    def get_kitchen_dao(self) -> dao.interfaces.IKitchenDAO:
         pass

@@ -1,13 +1,10 @@
-# TODO write SQLIteDAOFactory class implementing of IDaoFactory
-
-import factories.interfaces
-from infra import repositories
+from infra import dao
 import factories
 
 
-class SQLIteDAOFactory(factories.interfaces.IRepositoryFactory):
-    def get_supplier_repository(self) -> repositories.interfaces.ISupplierRepository:
-        return repositories.InMemorySuppliersRepository()
+class SQLIteDAOFactory(factories.interfaces.IDAOFactory):
+    def get_supplier_dao(self) -> dao.interfaces.ISupplierDAO:
+        return dao.SQLiteSupplierDAO()
 
-    def get_kitchen_repository(self) -> repositories.interfaces.IKitchenRepository:
-        return repositories.InMemoryKitchenRepository()
+    def get_kitchen_dao(self) -> dao.interfaces.IKitchenDAO:
+        return dao.SQLiteKitchenDAO()

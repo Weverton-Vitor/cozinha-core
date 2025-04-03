@@ -6,7 +6,7 @@ from infra import exceptions
 from business import entities
 
 
-class SQLiteSupplierRepository(interfaces.ISupplierDAO):
+class SQLiteSupplierDAO(interfaces.ISupplierDAO):
     def __init__(
         self,
         db_path: str,
