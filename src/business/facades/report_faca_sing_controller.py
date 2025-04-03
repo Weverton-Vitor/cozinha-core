@@ -1,7 +1,6 @@
 import json
 from controllers import SupplierController, KitchenController
-from repositories import InterfaceRepository
-from entities import Supplier, Kitchen
+from infra import repositories
 from business.decorators import singleton
 
 
@@ -9,8 +8,8 @@ from business.decorators import singleton
 class KitchenSupplierFacade:
     def __init__(
         self,
-        supplier_repo: InterfaceRepository[Supplier],
-        kitchen_repo: InterfaceRepository[Kitchen],
+        supplier_repo: repositories.interfaces.ISupplierRepository,
+        kitchen_repo: repositories.interfaces.IKitchenRepository,
     ):
         self.supplier_controller = SupplierController(supplier_repo)
         self.kitchen_controller = KitchenController(kitchen_repo)
