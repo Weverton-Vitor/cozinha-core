@@ -1,5 +1,3 @@
-# TODO write IDAOFactory interface code
-
 from abc import ABC, abstractmethod
 from infra import dao
 

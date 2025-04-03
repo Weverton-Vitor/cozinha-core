@@ -4,14 +4,18 @@ from repositories import InterfaceRepository
 from entities import Supplier, Kitchen
 from business.decorators import singleton
 
+
 @singleton
 class KitchenSupplierFacade:
-    def __init__(self, supplier_repo: InterfaceRepository[Supplier], kitchen_repo: InterfaceRepository[Kitchen]):
+    def __init__(
+        self,
+        supplier_repo: InterfaceRepository[Supplier],
+        kitchen_repo: InterfaceRepository[Kitchen],
+    ):
         self.supplier_controller = SupplierController(supplier_repo)
         self.kitchen_controller = KitchenController(kitchen_repo)
 
-    
-    # TODO: Implementar template 
+    # TODO: Call template
     def report(self) -> str:
         """Gera um relatório consolidado de fornecedores e cozinhas no formato JSON."""
         suppliers = self.supplier_controller.get_all_suppliers()
