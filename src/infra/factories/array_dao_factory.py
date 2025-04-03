@@ -1,5 +1,3 @@
-# TODO write ArrayDAOFactory class implementing of IDaoFactory
-
 from infra import dao
 import factories
 
