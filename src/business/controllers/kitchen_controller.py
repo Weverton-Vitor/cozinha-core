@@ -1,10 +1,8 @@
-import entities
-import exceptions.DeleteException
-import exceptions.LookupException
-import services
-import exceptions
-import repositories
-import validators
+from business import services
+from business import validators
+from business import entities
+from infra import repositories
+from infra import exceptions
 
 
 class KitchenController:

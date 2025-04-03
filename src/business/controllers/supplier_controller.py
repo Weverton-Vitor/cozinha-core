@@ -1,19 +1,19 @@
-import entities
-import exceptions.DeleteException
-import exceptions.LookupException
-import services
-import exceptions
-import repositories
-import validators
+from business import services
+from business import validators
+from business import entities
+from infra import repositories
+from infra import exceptions
 
 
 class SupplierController:
     __service: services.SuppliersService
     __repository: repositories.InterfaceRepository
 
-    def __init__(self, service: services.SuppliersService = None,
-                 repository: repositories.InterfaceRepository = None):
-
+    def __init__(
+        self,
+        service: services.SuppliersService = None,
+        repository: repositories.InterfaceRepository = None,
+    ):
         if service is None:
             self.__service = services.SuppliersService(
                 validators.UsernameValidator(),
@@ -38,19 +38,19 @@ class SupplierController:
             print(f"Erro de senha: {e}")
         except exceptions.PersistenceException as e:
             print(f"Erro de persistência: {e}")
-            
+
     def update_supplier(self, identifier: str, supplier: entities.Supplier):
         try:
             self.__repository.update(identifier=identifier, item=supplier)
         except exceptions.PersistenceException as e:
             print(f"Erro de persistência: {e}")
-            
+
     def get_supplier(self, identifier: str) -> entities.Supplier:
         try:
             return self.__repository.get(identifier=identifier)
         except exceptions.LookupException as e:
             print(f"Erro de persistência: {e}")
-    
+
     def delete_supplier(self, identifier: str) -> entities.Supplier:
         try:
             return self.__repository.delete(identifier=identifier)
