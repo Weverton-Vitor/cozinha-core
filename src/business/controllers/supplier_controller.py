@@ -7,12 +7,12 @@ from infra import exceptions
 
 class SupplierController:
     __service: services.SuppliersService
-    __repository: repositories.InterfaceRepository
+    __repository: repositories.IRepository
 
     def __init__(
         self,
         service: services.SuppliersService = None,
-        repository: repositories.InterfaceRepository = None,
+        repository: repositories.IRepository = None,
     ):
         if service is None:
             self.__service = services.SuppliersService(

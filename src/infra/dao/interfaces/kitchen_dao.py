@@ -1,9 +1,8 @@
 from abc import ABC, abstractmethod
-
 from business import entities
 
 
-class InterfaceSupplierDAO(ABC):
+class IKitchenDAO(ABC):
     def execute(self):
         self.connect()
         self.query()
@@ -18,7 +17,7 @@ class InterfaceSupplierDAO(ABC):
         pass
 
     @abstractmethod
-    def create(self, supplier: entities.Supplier):
+    def create(self, kitchen: entities.Kitchen):
         pass
 
     @abstractmethod
@@ -26,7 +25,7 @@ class InterfaceSupplierDAO(ABC):
         pass
 
     @abstractmethod
-    def update(self, supplier: entities.Supplier):
+    def update(self, kitchen: entities.Kitchen):
         pass
 
     @abstractmethod

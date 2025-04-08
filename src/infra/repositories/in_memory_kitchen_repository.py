@@ -1,24 +1,23 @@
+from infra.factories.array_dao_factory import ArrayDAOFactory
 from infra.repositories import interfaces
 from business import entities
 
 class InMemoryKitchenRepository(interfaces.IKitchenRepository):
     def __init__(self):
-        self._kitchens = []
+        dao_factory = ArrayDAOFactory()
+        self.kitchen_dao = dao_factory.get_kitchen_dao()
 
     def create(self, kitchen: entities.Kitchen) -> None:
-        self._kitchens.append(kitchen)
+        self.kitchen_dao.create(kitchen)
 
     def delete(self, username: str) -> None:
-        self._kitchens = [k for k in self._kitchens if k.username != username]
+        self.kitchen_dao.delete(username)
 
     def update(self, username: str, kitchen: entities.Kitchen) -> None:
-        for index, existing_kitchen in enumerate(self._kitchens):
-            if existing_kitchen.username == username:
-                self._kitchens[index] = kitchen
-                return
+        self.kitchen_dao.update(username, kitchen)
 
-    def get(self, username: str) -> entities.Kitchen | None:
-        return next((k for k in self._kitchens if k.username == username), None)
+    def get(self, kitchenname: str) -> entities.Kitchen | None:
+        return self.kitchen_dao.get(kitchenname)
 
     def getAll(self) -> list[entities.Kitchen]:
-        return self._kitchens
+        return self.kitchen_dao.getAll()

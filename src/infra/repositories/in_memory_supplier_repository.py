@@ -1,29 +1,24 @@
+from business import entities
+from infra import factories
 from infra.repositories import interfaces
-from business.entities import Supplier
+
 
 class InMemorySuppliersRepository(interfaces.ISupplierRepository):
     def __init__(self):
+        dao_factory = factories.ArrayDAOFactory()
+        self.supplier_dao = dao_factory.get_supplier_dao()
 
-        self._suppliers = {}
-
-    def create(self, supplier: Supplier) -> None:
-        
-        self._suppliers[supplier.username] = supplier
+    def create(self, supplier: entities.Supplier) -> None:
+        self.supplier_dao.create(supplier)
 
     def delete(self, username: str) -> None:
-        
-        if username in self._suppliers:
-            del self._suppliers[username]
+        self.supplier_dao.delete(username)
 
-    def update(self, username: str, supplier: Supplier) -> None:
-        
-        if username in self._suppliers:
-            self._suppliers[username] = supplier
+    def update(self, username: str, supplier: entities.Supplier) -> None:
+        self.supplier_dao.update(username, supplier)
 
-    def get(self, username: str) -> Supplier | None:
-        
-        return self._suppliers.get(username)
+    def get(self, username: str) -> entities.Supplier | None:
+        return self.supplier_dao.get(username)
 
-    def getAll(self) -> list[Supplier]:
-        
-        return list(self._suppliers.values())
+    def getAll(self) -> list[entities.Supplier]:
+        return self.supplier_dao.getAll()
