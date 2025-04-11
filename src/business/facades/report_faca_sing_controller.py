@@ -2,6 +2,7 @@ import json
 from business import controllers, services, templates, validators
 from infra import repositories
 from business.decorators import singleton
+import logger
 
 
 @singleton
@@ -16,9 +17,11 @@ class KitchenSupplierFacade:
             validators.UsernameValidator(),
             validators.PasswordValidator(),
         )
+        logger_ = logger.PythonLoggerAdapter()
 
         self.supplier_controller = controllers.SupplierController(supplier_service,
-                                                                  supplier_repo)
+                                                                  supplier_repo, 
+                                                                  logger_)
         self.kitchen_controller = controllers.KitchenController(kitchen_repo)
         self._report = report
 

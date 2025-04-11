@@ -1,4 +1,5 @@
 from business import services, validators, controllers
+import logger
 import views
 from infra import repositories
 
@@ -9,7 +10,7 @@ def main():
         validators.PasswordValidator(),
     )
     supplier_controller = controllers.SupplierController(
-        supplier_service, repository=repositories.SQLiteSupplierRepository())
+        supplier_service, repository=repositories.SQLiteSupplierRepository(), logger=logger.PythonLoggerAdapter())
     supplier_view = views.SupplierView(supplier_controller)
 
     supplier_view.create_supplier("Ceasa", "Gf3/@sfsdeasaFsd")

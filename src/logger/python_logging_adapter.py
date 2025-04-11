@@ -1,7 +1,9 @@
+from business.decorators import singleton
 import logger
 import logging
 
 
+@singleton
 class PythonLoggerAdapter(logger.LoggerAdapter):
     def __init__(self):
         self.logger = logging
