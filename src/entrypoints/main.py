@@ -1,9 +1,15 @@
-import controllers
+from business import services, validators, controllers
 import views
-from repositories import SQLiteSupplierRepository
+from infra import repositories
+
 
 def main():
-    supplier_controller = controllers.SupplierController(repository=SQLiteSupplierRepository())
+    supplier_service = services.SuppliersService(
+        validators.UsernameValidator(),
+        validators.PasswordValidator(),
+    )
+    supplier_controller = controllers.SupplierController(
+        supplier_service, repository=repositories.SQLiteSupplierRepository())
     supplier_view = views.SupplierView(supplier_controller)
 
     supplier_view.create_supplier("Ceasa", "Gf3/@sfsdeasaFsd")

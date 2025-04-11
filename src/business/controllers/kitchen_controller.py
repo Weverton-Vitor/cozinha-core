@@ -7,12 +7,12 @@ from infra import exceptions
 
 class KitchenController:
     __service: services.KitchensService
-    __repository: repositories.IRepository
+    __repository: repositories.IKitchenRepository
 
     def __init__(
         self,
         service: services.KitchensService = None,
-        repository: repositories.IRepository = None,
+        repository: repositories.IKitchenRepository = None,
     ):
         if service is None:
             self.__service = services.KitchensService(

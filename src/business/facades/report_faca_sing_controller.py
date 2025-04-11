@@ -1,5 +1,5 @@
 import json
-from business import controllers
+from business import controllers, services, templates, validators
 from infra import repositories
 from business.decorators import singleton
 
@@ -10,21 +10,21 @@ class KitchenSupplierFacade:
         self,
         supplier_repo: repositories.interfaces.ISupplierRepository,
         kitchen_repo: repositories.interfaces.IKitchenRepository,
+        report: templates.SystemStatsReportExporter
     ):
-        self.supplier_controller = controllers.SupplierController(supplier_repo)
+        supplier_service = services.SuppliersService(
+            validators.UsernameValidator(),
+            validators.PasswordValidator(),
+        )
+
+        self.supplier_controller = controllers.SupplierController(supplier_service,
+                                                                  supplier_repo)
         self.kitchen_controller = controllers.KitchenController(kitchen_repo)
+        self._report = report
 
-    # TODO: Call template
-    def report(self) -> str:
+    def report(self, path_to_save) -> str:
         """Gera um relatório consolidado de fornecedores e cozinhas no formato JSON."""
-        suppliers = self.supplier_controller.get_suppliers()
-        kitchens = self.kitchen_controller.get_kitchens()
+        suppliers = self.supplier_controller.get_suppliers() or []
+        kitchens = self.kitchen_controller.get_kitchens() or []
 
-        report = {
-            "suppliers": [{"name": s.name} for s in suppliers],
-            "suppliers_count": len(suppliers),
-            "kitchens": [{"name": k.name, "user_name": k.user_name} for k in kitchens],
-            "kitchens_count": len(kitchens),
-        }
-
-        return json.dumps(report, indent=4)
+        self._report.exportar(suppliers + kitchens, path_to_save)
