@@ -2,11 +2,13 @@ class Product:
     __product_id: str
     __name: str
     __stock: float
+    __unit: str
 
-    def __init__(self, product_id: str, name: str, stock: float):
+    def __init__(self, product_id: str, name: str, stock: float, unit: str):
         self.__product_id = product_id
         self.__name = name
         self.__stock = stock
+        self.__unit = unit
 
     def set_product_id(self, product_id: str):
         self.__product_id = product_id
@@ -25,6 +27,12 @@ class Product:
     
     def set_stock(self, stock: float):
         self.__stock = stock
+
+    def get_unit(self):
+        return self.__unit
+    
+    def set_unit(self, unit: float):
+        self.__unit = unit
 
     def __str__(self):
         return f"Product {{ {self.__product_id} }}"
