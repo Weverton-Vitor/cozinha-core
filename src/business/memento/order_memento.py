@@ -1,11 +1,10 @@
-from typing import List
 import Products
 
 class OrderMemento:
     __id: str
-    __products: List[Products]
+    __products: list[Products]
 
-    def __init__(self, id: str, products: List[Products]):
+    def __init__(self, id: str, products: list[Products]):
         self.__id = id
         self.__products = products
 
