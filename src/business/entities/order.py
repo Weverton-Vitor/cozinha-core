@@ -1,12 +1,11 @@
-from typing import List
 import Products
 from business.memento import order_memento
 
 class Order:
     __id: str
-    __products: List[Products]
+    __products: list[Products]
 
-    def __init__(self, id: str, products: List[Products]):
+    def __init__(self, id: str, products: list[Products]):
         self.__id = id
         self.__products = products
 
@@ -16,7 +15,7 @@ class Order:
     def get_id(self):
         return self.__id
 
-    def set_products(self, products: List[Products]):
+    def set_products(self, products: list[Products]):
         self.__products = products
 
     def get_products(self):
