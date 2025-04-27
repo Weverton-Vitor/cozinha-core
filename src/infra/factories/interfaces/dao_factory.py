@@ -10,3 +10,7 @@ class IDAOFactory(ABC):
     @abstractmethod
     def get_kitchen_dao(self) -> dao.interfaces.IKitchenDAO:
         pass
+
+    @abstractmethod
+    def get_order_dao(self) -> dao.interfaces.IOrderDAO:
+        pass
