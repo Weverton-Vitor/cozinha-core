@@ -12,3 +12,6 @@ class SQLiteRepositoryFactory(factories.interfaces.IRepositoryFactory):
     
     def get_product_repository(self) -> repositories.interfaces.IProductRepository:
         return repositories.SQLiteProductRepository()
+
+    def get_order_repository(self) -> repositories.interfaces.IOrderRepository:
+        return repositories.SQLiteOrderRepository()
