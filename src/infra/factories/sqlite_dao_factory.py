@@ -8,3 +8,6 @@ class SQLIteDAOFactory(factories.interfaces.IDAOFactory):
 
     def get_kitchen_dao(self) -> dao.interfaces.IKitchenDAO:
         return dao.SQLiteKitchenDAO()
+    
+    def get_product_dao(self) -> dao.interfaces.IProductDAO:
+        return dao.SQLiteProductDAO()
