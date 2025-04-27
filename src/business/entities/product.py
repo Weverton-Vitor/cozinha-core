@@ -31,7 +31,7 @@ class Product:
     def get_unit(self):
         return self.__unit
     
-    def set_unit(self, unit: float):
+    def set_unit(self, unit: str):
         self.__unit = unit
 
     def __str__(self):
