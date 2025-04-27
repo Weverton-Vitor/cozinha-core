@@ -12,3 +12,6 @@ class ArrayDAOFactory(factories.interfaces.IDAOFactory):
     
     def get_product_dao(self) -> dao.interfaces.IProductDAO:
         return dao.ArrayProductDAO()
+    
+    def get_order_dao(self) -> dao.interfaces.IOrderDAO:
+        return dao.ArrayOrderDAO()
