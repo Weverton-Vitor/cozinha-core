@@ -9,3 +9,6 @@ class ArrayDAOFactory(factories.interfaces.IDAOFactory):
 
     def get_kitchen_dao(self) -> dao.interfaces.IKitchenDAO:
         return dao.ArrayKitchenDAO()
+    
+    def get_order_dao(self) -> dao.interfaces.IOrderDAO:
+        return dao.ArrayOrderDAO()
