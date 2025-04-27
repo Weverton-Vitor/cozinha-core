@@ -1,10 +1,9 @@
 from business import entities
 from memento.order_memento import OrderMemento
-from typing import List
 
 class OrderCareTaker:
     __originator: entities.Order
-    __history: List[OrderMemento]
+    __history: list[OrderMemento]
 
     def __init__(self, originator: entities.Order):
         self.__originator = originator
