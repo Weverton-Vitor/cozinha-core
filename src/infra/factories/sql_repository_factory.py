@@ -9,3 +9,6 @@ class SQLiteRepositoryFactory(factories.interfaces.IRepositoryFactory):
 
     def get_kitchen_repository(self) -> repositories.interfaces.IKitchenRepository:
         return repositories.SQLiteKitchenRepository()
+    
+    def get_product_repository(self) -> repositories.interfaces.IProductRepository:
+        return repositories.SQLiteProductRepository()

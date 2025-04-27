@@ -9,3 +9,6 @@ class InMemoryRepositoryFactory(factories.interfaces.IRepositoryFactory):
 
     def get_kitchen_repository(self) -> repositories.interfaces.IKitchenRepository:
         return repositories.InMemoryKitchenRepository()
+    
+    def get_Product_repository(self) -> repositories.interfaces.IProductRepository:
+        return repositories.InMemoryProductRepository()
