@@ -15,22 +15,29 @@ class Product:
 
     def get_product_id(self):
         return self.__product_id
-    
+
     def get_name(self):
         return self.__name
-    
+
     def set_name(self, name: str):
         self.__name = name
 
     def get_stock(self):
         return self.__stock
-    
+
     def set_stock(self, stock: float):
         self.__stock = stock
 
+        
+        from src.business.events.dispatcher import EventDispatcher
+        from src.business.events.product_events import ProductStockUpdatedEvent
+
+        event = ProductStockUpdatedEvent(self.__product_id, stock)
+        EventDispatcher.dispatch(event)
+
     def get_unit(self):
         return self.__unit
-    
+
     def set_unit(self, unit: str):
         self.__unit = unit
 
