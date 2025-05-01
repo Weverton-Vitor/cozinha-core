@@ -5,7 +5,6 @@ from business import services, validators, entities
 from infra import repositories
 
 
-
 class KitchenController:
     __service: services.KitchensService
     __repository: repositories.IKitchenRepository
@@ -51,7 +50,9 @@ class KitchenController:
         except infra.exceptions.PersistenceException as e:
             return f"Erro de persistência: {e}"
 
-    def update_kitchen(self, identifier: str, kitchen: entities.kitchen):
+    def update_kitchen(self, identifier: str, kitchen_dict: dict):
+        kitchen = entities.Kitchen(**kitchen_dict)
+
         try:
             self.__repository.update(identifier=identifier, item=kitchen)
         except infra.exceptions.PersistenceException as e:
@@ -63,7 +64,7 @@ class KitchenController:
         except infra.exceptions.LookupException as e:
             return f"Erro de persistência: {e}"
 
-    def delete_kitchen(self, identifier: str) -> entities.kitchen:
+    def delete_kitchen(self, identifier: str) -> entities.Kitchen:
         try:
             return self.__repository.delete(identifier=identifier)
         except infra.exceptions.DeleteException as e:

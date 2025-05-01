@@ -24,23 +24,45 @@ class KitchenView:
         if result:
             return {"success": False, "message": result}, 400
 
-        return {"success": True}, 201
+        return {"success": True, "kitchen": result}, 201
 
-    # TODO
     def update_kitchen(self):
-        return {"to": "do"}
+        data = flask.request.get_json()
+        name = str(data.get("name", None))
 
-    # TODO
+        kitchen_data = {
+            "name": name,
+            "password": str(data.get("password", None)),
+            "user_name": str(data.get("user_name", None)),
+            "address": str(data.get("address", None)),
+            "phone_number": str(data.get("phone_number", None)),
+            "email": str(data.get("email", None)),
+        }
+
+        result = self.__controller_kitchen.update_kitchen(name, kitchen_data)
+
+        if result:
+            return {"success": False, "message": result}, 400
+
+        return {"success": True, "kitchen": result}, 200
+
     def display_kitchens(self):
         kitchens = self.__controller_kitchen.get_kitchens()
-        return kitchens
+        return {"success": True, "kitchens": kitchens}, 200
 
     def show_message(self, message: str):
         print(message)
 
     def genereate_report(self, report_facade: facades.ReportFacade):
-        return report_facade.report()
+        return {"success": "True", "report": report_facade.report()}, 200
 
-    # TODO
     def remove_kitchen(self):
-        return {"to": "do"}
+        data = flask.request.get_json()
+        name = str(data.get("name", None))
+
+        result = self.__controller_kitchen.delete_kitchen(name)
+
+        if result:
+            return {"success": False, "message": result}, 400
+
+        return {"success": True, "kitchen": result}, 200

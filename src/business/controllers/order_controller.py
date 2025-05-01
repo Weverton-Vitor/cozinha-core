@@ -9,20 +9,20 @@ class OrderController:
 
     def __init__(
         self,
-        repository: repositories.IOrderRepository = None,
-        command: commands.Command = None
+        repository: repositories.IOrderRepository,
+        command: commands.Command
     ):
-        if repository is None:
-            self.__repository = repositories.InMemoryOrderRepository()
-        else:
-            self.__repository = repository
+        self.__repository = repository
         self.__command = command
+
 
 def set_command(self, command: commands.Command):
     self.__command = command
 
+
 def execute_command(self):
     self.__command.execute()
 
+
 def create_order():
-    return 
+    return
