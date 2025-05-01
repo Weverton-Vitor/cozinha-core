@@ -1,4 +1,6 @@
-class Product:
+from src.business.event.product_events import EventListener
+
+class Product(EventListener):
     __product_id: str
     __name: str
     __stock: float
@@ -33,6 +35,12 @@ class Product:
     
     def set_unit(self, unit: str):
         self.__unit = unit
+
+    def update(self, data: dict):
+        """Recebe notificações do dispatcher"""
+        if data.get("product_id") == self.__product_id:
+            self.set_stock(data.get("new_stock"))
+            print(f"Estoque do produto '{self.__name}' atualizado para {self.__stock}")
 
     def __str__(self):
         return f"Product {{ {self.__product_id} }}"

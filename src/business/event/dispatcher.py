@@ -1,14 +1,19 @@
 class EventDispatcher:
-    __subscribers = {}
+    __listeners = {}
 
     @staticmethod
     def subscribe(event_name: str, listener):
-        if event_name not in EventDispatcher.__subscribers:
-            EventDispatcher.__subscribers[event_name] = []
-        EventDispatcher.__subscribers[event_name].append(listener)
+        if event_name not in EventDispatcher.__listeners:
+            EventDispatcher.__listeners[event_name] = []
+        EventDispatcher.__listeners[event_name].append(listener)
 
     @staticmethod
-    def dispatch(event):
-        listeners = EventDispatcher.__subscribers.get(event.name, [])
-        for listener in listeners:
-            listener(event)
+    def unsubscribe(event_name: str, listener):
+        if event_name in EventDispatcher.__listeners:
+            EventDispatcher.__listeners[event_name].remove(listener)
+
+    @staticmethod
+    def notify(event_name: str, data: dict):
+        if event_name in EventDispatcher.__listeners:
+            for listener in EventDispatcher.__listeners[event_name]:
+                listener.update(data)
