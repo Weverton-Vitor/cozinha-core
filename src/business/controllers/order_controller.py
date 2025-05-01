@@ -9,20 +9,27 @@ class OrderController:
 
     def __init__(
         self,
-        repository: repositories.IOrderRepository,
-        command: commands.Command
+        repository: repositories.IOrderRepository = None,
+        command: commands.Command = None
     ):
-        self.__repository = repository
+        if repository is None:
+            self.__repository = repositories.InMemoryOrderRepository()
+        else:
+            self.__repository = repository
         self.__command = command
-
 
 def set_command(self, command: commands.Command):
     self.__command = command
 
-
 def execute_command(self):
-    self.__command.execute()
+    self.__command.execute(self.__repository)
 
+def create_order(self, id, products):
+    order = entities.Order(id, products)
+    self.__repository.create(order)
 
-def create_order():
-    return
+def update_order(self, id: str, products: list[entities.Product]):
+    self.__repository.update(id, products)
+                
+def get_orders(self):
+    return self.__repository.getAll()
