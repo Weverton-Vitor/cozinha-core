@@ -1,11 +1,11 @@
+from infra.dao import IKitchenDAO
 from infra.factories.array_dao_factory import ArrayDAOFactory
 from infra.repositories import interfaces
 from business import entities
 
 class InMemoryKitchenRepository(interfaces.IKitchenRepository):
-    def __init__(self):
-        dao_factory = ArrayDAOFactory()
-        self.kitchen_dao = dao_factory.get_kitchen_dao()
+    def __init__(self, kitchen_dao: IKitchenDAO):
+        self.kitchen_dao = kitchen_dao
 
     def create(self, kitchen: entities.Kitchen) -> None:
         self.kitchen_dao.create(kitchen)

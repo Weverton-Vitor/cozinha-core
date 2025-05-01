@@ -1,10 +1,10 @@
 from infra import repositories
 from business import entities
-from infra.factories.sqlite_dao_factory import SQLIteDAOFactory
+from infra.dao import ISupplierDAO
 
 
 class SQLiteSupplierRepository(repositories.interfaces.ISupplierRepository):
-    def __init__(self, supplier_dao):
+    def __init__(self, supplier_dao: ISupplierDAO):
         self.supplier_dao = supplier_dao
 
     def create(self, supplier: entities.Supplier) -> None:

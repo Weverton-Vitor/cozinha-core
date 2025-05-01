@@ -1,11 +1,10 @@
-from infra.factories.array_dao_factory import ArrayDAOFactory
+from infra.dao import IOrderDAO
 from infra.repositories import interfaces
 from business import entities
 
 class InMemoryOrderRepository(interfaces.IOrderRepository):
-    def __init__(self):
-        dao_factory = ArrayDAOFactory()
-        self.order_dao = dao_factory.get_order_dao()
+    def __init__(self, order_dao: IOrderDAO):
+        self.order_dao = order_dao
 
     def create(self, order: entities.Order) -> None:
         self.order_dao.create(order)

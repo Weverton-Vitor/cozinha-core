@@ -1,12 +1,12 @@
 from business import entities
 from infra import repositories
-from infra.factories.sqlite_dao_factory import SQLIteDAOFactory
+from infra.dao import IKitchenDAO
 
 # TODO write SQLiteKitchenRepository class that implements IKitchenRepository interface
 
 
 class SQLiteKitchenRepository(repositories.interfaces.IKitchenRepository):
-    def __init__(self, kitchen_dao):
+    def __init__(self, kitchen_dao: IKitchenDAO):
         self.kitchen_dao = kitchen_dao
 
     def create(self, kitchen: entities.Kitchen) -> None:
