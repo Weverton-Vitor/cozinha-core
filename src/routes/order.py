@@ -14,7 +14,7 @@ order_view = order_view_builder.get_product()
 order_bp.add_url_rule(
     '/', view_func=order_view.create_order, methods=['POST'])
 order_bp.add_url_rule(
-    '/', view_func=order_view.up, methods=['PUT'])
+    '/', view_func=order_view.update_order, methods=['PUT'])
 order_bp.add_url_rule(
     '/', view_func=order_view.delete_order, methods=['DELETE'])
 order_bp.add_url_rule(

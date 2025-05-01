@@ -34,7 +34,7 @@ class OrderViewBuilder(IViewBuilder):
     def build_controller(self):
         self.__logger = PythonLoggerAdapter()
         self.__controller = OrderController(
-            self.__service, self.__repository, self.__logger)
+            self.__repository, self.__logger)
 
     def build_DAO(self):
         self.__dao = SQLIteDAOFactory().get_supplier_dao()
