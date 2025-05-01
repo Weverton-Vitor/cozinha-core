@@ -12,6 +12,7 @@ class ReportFacade:
         supplier_repo: repositories.interfaces.ISupplierRepository,
         kitchen_repo: repositories.interfaces.IKitchenRepository,
         product_repo: repositories.interfaces.IProductRepository,
+        order_repo: repositories.interfaces.IOrderRepository,
         report: templates.ISystemStatsReportExporter
     ):
         supplier_service = services.SuppliersService(
@@ -25,6 +26,7 @@ class ReportFacade:
                                                                   logger_)
         self.kitchen_controller = controllers.KitchenController(kitchen_repo)
         self.product_controller = controllers.ProductController(product_repo)
+        self.order_controller = controllers.OrderController(order_repo)
         self._report = report
 
     def report(self, path_to_save) -> str:
