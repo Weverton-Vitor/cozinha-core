@@ -1,14 +1,12 @@
 from abc import ABC, abstractmethod
 
 class Command(ABC):
-    @abstractmethod
-    def __init__(id: str):
-        pass
+    __id: str
+
+    def __init__(self, id: str):
+        self.__id = id
 
     @abstractmethod
     def execute(self):
         pass
 
-    @abstractmethod
-    def undo(self):
-        pass
