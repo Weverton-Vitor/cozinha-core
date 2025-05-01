@@ -1,6 +1,6 @@
 import validators
 
-#TODO - Implementar a classe KitchensService
+
 class KitchensService:
     __username_validator: validators.IUsernameValidator
     __password_validator: validators.IPasswordValidator
