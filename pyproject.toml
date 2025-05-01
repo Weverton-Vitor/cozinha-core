@@ -1,7 +1,7 @@
 [project]
 name = "cozinha-core"
 version = "0.0.1"
-dependencies = []
+dependencies = ["flask ~= 3.1", "pandas ~= 2.2", "fpdf ~= 1.7"]
 requires-python = ">= 3.11"
 
 [project.scripts]

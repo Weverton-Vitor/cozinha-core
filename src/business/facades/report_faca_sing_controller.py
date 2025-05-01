@@ -12,7 +12,7 @@ class ReportFacade:
         supplier_repo: repositories.interfaces.ISupplierRepository,
         kitchen_repo: repositories.interfaces.IKitchenRepository,
         product_repo: repositories.interfaces.IProductRepository,
-        report: templates.SystemStatsReportExporter
+        report: templates.ISystemStatsReportExporter
     ):
         supplier_service = services.SuppliersService(
             validators.UsernameValidator(),

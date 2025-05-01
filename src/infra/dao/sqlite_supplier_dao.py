@@ -1,5 +1,6 @@
+from logger import LoggerAdapter, PythonLoggerAdapter
 import sqlite3
-from dao import interfaces
+from infra.dao import interfaces
 
 from typing import List
 from infra import exceptions
@@ -7,6 +8,8 @@ from business import entities
 
 
 class SQLiteSupplierDAO(interfaces.ISupplierDAO):
+    logger: LoggerAdapter = PythonLoggerAdapter()
+
     def __init__(
         self,
         db_path: str,
@@ -19,6 +22,7 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
         self.supplier_class = supplier_class
         self.fields = fields
         self.conn = None
+        self.cursor = None
         self.connect()
         self._initialize_db()
         self.close()
@@ -27,9 +31,11 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
         try:
             self.connect()
             fields_sql = ", ".join(self.fields)
-            self.query(f"CREATE TABLE IF NOT EXISTS {self.table_name} ({fields_sql})")
+            self.query(
+                f"CREATE TABLE IF NOT EXISTS {self.table_name} ({fields_sql})")
             self.conn.commit()
-        except Exception:
+        except Exception as e:
+            self.logger.log_error(f"{e}")
             raise exceptions.PersistenceException()
         finally:
             self.close()
@@ -37,8 +43,10 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
     def connect(self):
         try:
             self.conn = sqlite3.connect(self.db_path)
+            self.cursor = self.conn.cursor()
         except Exception as e:
-            raise exceptions.PersistenceException(f"Failed to connect to database: {e}")
+            raise exceptions.PersistenceException(
+                f"Failed to connect to database: {e}")
 
     def query(self, sql: str, params: tuple = ()):
         if not self.cursor:
@@ -49,7 +57,8 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
     def create(self, supplier: entities.Supplier) -> None:
         try:
             self.connect()
-            values = [getattr(supplier, f"get_{field}")() for field in self.fields[:-1]]
+            values = [getattr(supplier, f"get_{field}")()
+                      for field in self.fields[:-1]]
             placeholders = ", ".join(["?"] * len(values))
             self.query(
                 f"INSERT INTO {self.table_name} ({', '.join(self.fields[:-1])}) VALUES ({placeholders})",
@@ -64,7 +73,8 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
     def delete(self, name: str) -> None:
         try:
             self.connect()
-            self.query(f"DELETE FROM {self.table_name} WHERE name = ?", (name,))
+            self.query(
+                f"DELETE FROM {self.table_name} WHERE name = ?", (name,))
             self.conn.commit()
         except Exception:
             raise exceptions.PersistenceException()
@@ -74,7 +84,8 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
     def update(self, name: str, supplier: entities.Supplier) -> None:
         try:
             self.connect()
-            set_clause = ", ".join([f"{field} = ?" for field in self.fields[1:-1]])
+            set_clause = ", ".join(
+                [f"{field} = ?" for field in self.fields[1:-1]])
             values = [
                 getattr(supplier, f"get_{field}")() for field in self.fields[1:-1]
             ] + [name]
@@ -90,7 +101,8 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
     def get(self, name: str) -> entities.Supplier | None:
         try:
             self.connect()
-            row = self.query(f"SELECT * FROM {self.table_name} WHERE name = ?", (name,))
+            row = self.query(
+                f"SELECT * FROM {self.table_name} WHERE name = ?", (name,))
             return self.supplier_class(*row[0]) if row else None
         except Exception:
             raise exceptions.PersistenceException()

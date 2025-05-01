@@ -1,5 +1,5 @@
 from typing import List
-from dao import interfaces
+from infra.dao import interfaces
 from business import entities
 
 

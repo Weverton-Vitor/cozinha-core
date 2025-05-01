@@ -1,9 +1,10 @@
-from infra import dao
-import factories
+from infra import dao, factories
+
+
 from business.decorators import singleton
 
 @singleton
-class ArrayDAOFactory(factories.interfaces.IDAOFactory):
+class ArrayDAOFactory(factories.IDAOFactory):
     def get_supplier_dao(self) -> dao.interfaces.ISupplierDAO:
         return dao.ArraySupplierDAO()
 

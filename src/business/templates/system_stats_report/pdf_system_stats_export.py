@@ -1,9 +1,9 @@
 from fpdf import FPDF
-from infra import templates
+from business import templates
 
 # TODO Add fpdf into dependencies
 
-class PdfSystemStatsExporter(templates.interfaces.SystemStatsReportExporter):
+class PdfSystemStatsExporter(templates.ISystemStatsReportExporter):
     def preparar_dados(self, dados):
         self.pdf = FPDF()
         self.pdf.add_page()

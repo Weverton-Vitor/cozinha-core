@@ -3,10 +3,11 @@ from infra import repositories
 from infra.factories.sqlite_dao_factory import SQLIteDAOFactory
 
 # TODO write SQLiteKitchenRepository class that implements IKitchenRepository interface
+
+
 class SQLiteKitchenRepository(repositories.interfaces.IKitchenRepository):
-    def __init__(self):
-        dao_factory = SQLIteDAOFactory()
-        self.kitchen_dao = dao_factory.get_kitchen_dao()
+    def __init__(self, kitchen_dao):
+        self.kitchen_dao = kitchen_dao
 
     def create(self, kitchen: entities.Kitchen) -> None:
         self.kitchen_dao.create(kitchen)
