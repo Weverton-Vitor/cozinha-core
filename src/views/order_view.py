@@ -18,6 +18,10 @@ class OrderView:
             id, products
         )
 
+    # TODO
+    def update_order(self):
+        pass
+
     def display_orders(self):
         orders = self.__controller_order.get_orders()
         for order in orders:

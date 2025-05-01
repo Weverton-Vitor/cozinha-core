@@ -1,4 +1,5 @@
 from business import controllers, facades
+import flask
 
 
 class KitchenView:
@@ -7,15 +8,7 @@ class KitchenView:
     def __init__(self, controller_kitchen: controllers.KitchenController):
         self.__controller_kitchen = controller_kitchen
 
-    def create_kitchen(
-        self,
-        #
-        #
-        #
-        #
-        #
-        #
-    ):
+    def create_kitchen(self):
         data = flask.request.get_json()
         name = str(data.get("name", None))
         password = str(data.get("password", None))

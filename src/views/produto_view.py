@@ -10,6 +10,14 @@ class ProductView:
     def create_product(self, product_id: str, name: str, stock: float, unit: str):
         self.__controller.add_product(product_id, name, stock, unit)
 
+    # TODO
+    def update_product(self):
+        pass
+
+    # TODO
+    def remove_product(self):
+        pass
+
     def display_products(self):
         products = self.__controller.get_products()
         for product in products:
