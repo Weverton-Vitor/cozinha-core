@@ -1,12 +1,11 @@
 from business import entities
-from infra import factories
+from infra.dao import ISupplierDAO
 from infra.repositories import interfaces
 
 
 class InMemorySuppliersRepository(interfaces.ISupplierRepository):
-    def __init__(self):
-        dao_factory = factories.ArrayDAOFactory()
-        self.supplier_dao = dao_factory.get_supplier_dao()
+    def __init__(self, supplier_dao: ISupplierDAO):
+        self.supplier_dao = supplier_dao
 
     def create(self, supplier: entities.Supplier) -> None:
         self.supplier_dao.create(supplier)

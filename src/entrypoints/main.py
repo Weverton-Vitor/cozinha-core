@@ -1,28 +1,20 @@
-from business import services, validators, controllers
-import logger
-import views
-from infra import repositories
+from flask import Flask
+from sys import argv
+
+from routes import kitchen_bp, supplier_bp, order_bp, product_bp
+
+app = Flask(__name__)
+app.register_blueprint(kitchen_bp, url_prefix="/kitchens")
+app.register_blueprint(supplier_bp, url_prefix="/suppliers")
+app.register_blueprint(order_bp, url_prefix="/orders")
+app.register_blueprint(product_bp, url_prefix="/products")
 
 
-def main():
-    supplier_service = services.SuppliersService(
-        validators.UsernameValidator(),
-        validators.PasswordValidator(),
-    )
-    supplier_controller = controllers.SupplierController(
-        supplier_service, repository=repositories.SQLiteSupplierRepository(), logger=logger.PythonLoggerAdapter())
-    supplier_view = views.SupplierView(supplier_controller)
-
-    supplier_view.create_supplier("Ceasa", "Gf3/@sfsdeasaFsd")
-    supplier_view.create_supplier("Assaí", "12348")
-    supplier_view.create_supplier("Assaí_um", "testeeeee")
-    supplier_view.create_supplier("Assaí_dois", "testeeeeeA")
-    supplier_view.create_supplier("Assaí_tres", "testeeeeeA2")
-    supplier_view.create_supplier("Assaí_quatro", "testeeeeeA2@")
-    supplier_view.create_supplier("Assaí Atacadista", "testeeeeeA2@")
-
-    supplier_view.display_suppliers()
+@app.route("/")
+def hello_world():
+    return {"message": "hello world"}
 
 
-if __name__ == "__main__":
-    main()
+debug = "--debug" in argv
+
+app.run(debug=debug)

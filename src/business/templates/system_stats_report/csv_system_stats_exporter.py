@@ -1,10 +1,10 @@
 
 import pandas as pd
-from infra import templates
+from business import templates
 
 # TODO Add pandas into dependencies
 
-class CsvSystemStatsExporter(templates.interfaces.SystemStatsReportExporter):
+class CsvSystemStatsExporter(templates.ISystemStatsReportExporter):
     def preparar_dados(self, dados):
         self.df = pd.DataFrame(dados)
 

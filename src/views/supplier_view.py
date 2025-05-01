@@ -15,5 +15,11 @@ class SupplierView:
         for supplier in suppliers:
             print(supplier)
 
+    def update_supplier(self):
+        pass
+
+    def remove_supplier(self):
+        pass
+
     def show_message(self, message: str):
         print(message)

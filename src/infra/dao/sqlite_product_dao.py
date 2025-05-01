@@ -1,5 +1,5 @@
 import sqlite3
-from dao import interfaces
+from infra.dao import interfaces
 
 from typing import List
 from infra import exceptions

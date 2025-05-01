@@ -1,17 +1,16 @@
-import factories.interfaces
-from infra import repositories
-import factories
+from infra import repositories, factories
+from infra.dao import ISupplierDAO, IProductDAO, IKitchenDAO, IOrderDAO
 
 
-class SQLiteRepositoryFactory(factories.interfaces.IRepositoryFactory):
-    def get_supplier_repository(self) -> repositories.interfaces.ISupplierRepository:
-        return repositories.SQLiteSupplierRepository()
+class SQLiteRepositoryFactory(factories.IRepositoryFactory):
+    def get_supplier_repository(self, supplier_dao: ISupplierDAO) -> repositories.ISupplierRepository:
+        return repositories.SQLiteSupplierRepository(supplier_dao)
 
-    def get_kitchen_repository(self) -> repositories.interfaces.IKitchenRepository:
-        return repositories.SQLiteKitchenRepository()
+    def get_product_repository(self, product_dao: IProductDAO) -> repositories.IProductRepository:
+        return repositories.SQLiteProductRepository(product_dao)
+
+    def get_order_repository(self, order_dao: IOrderDAO) -> repositories.interfaces.IOrderRepository:
+        return repositories.SQLiteOrderRepository(order_dao)
     
-    def get_product_repository(self) -> repositories.interfaces.IProductRepository:
-        return repositories.SQLiteProductRepository()
-
-    def get_order_repository(self) -> repositories.interfaces.IOrderRepository:
-        return repositories.SQLiteOrderRepository()
+    def get_kitchen_repository(self, kitchen_dao: IKitchenDAO) -> repositories.IKitchenRepository:
+        return repositories.SQLiteKitchenRepository(kitchen_dao)

@@ -1,8 +1,8 @@
-from business import services
-from business import validators
-from business import entities
+import business
+import infra
+
+from business import services, validators, entities
 from infra import repositories
-from infra import exceptions
 
 
 class KitchenController:
@@ -42,33 +42,36 @@ class KitchenController:
                     name, password, user_name, address, phone_number, email
                 )
                 self.__repository.create(kitchen)
-        except exceptions.InvalidUsernameException as e:
-            print(f"Erro de nome de usuário: {e}")
-        except exceptions.InvalidPasswordException as e:
-            print(f"Erro de senha: {e}")
-        except exceptions.PersistenceException as e:
-            print(f"Erro de persistência: {e}")
+        except business.exceptions.InvalidUsernameException as e:
+            return f"Erro de nome de usuário: {e}"
 
-    def update_kitchen(self, identifier: str, kitchen: entities.kitchen):
+        except business.exceptions.InvalidPasswordException as e:
+            return f"Erro de senha: {e}"
+        except infra.exceptions.PersistenceException as e:
+            return f"Erro de persistência: {e}"
+
+    def update_kitchen(self, identifier: str, kitchen_dict: dict):
+        kitchen = entities.Kitchen(**kitchen_dict)
+
         try:
             self.__repository.update(identifier=identifier, item=kitchen)
-        except exceptions.PersistenceException as e:
-            print(f"Erro de persistência: {e}")
+        except infra.exceptions.PersistenceException as e:
+            return f"Erro de persistência: {e}"
 
     def get_kitchen(self, identifier: str) -> entities.Kitchen:
         try:
             return self.__repository.get(identifier=identifier)
-        except exceptions.LookupException as e:
-            print(f"Erro de persistência: {e}")
+        except infra.exceptions.LookupException as e:
+            return f"Erro de persistência: {e}"
 
-    def delete_kitchen(self, identifier: str) -> entities.kitchen:
+    def delete_kitchen(self, identifier: str) -> entities.Kitchen:
         try:
             return self.__repository.delete(identifier=identifier)
-        except exceptions.DeleteException as e:
-            print(f"Erro de persistência: {e}")
+        except infra.exceptions.DeleteException as e:
+            return f"Erro de persistência: {e}"
 
     def get_kitchens(self):
         try:
             return self.__repository.getAll()
-        except exceptions.PersistenceException as e:
-            print(f"Erro de persistência: {e}")
+        except infra.exceptions.PersistenceException as e:
+            return f"Erro de persistência: {e}"

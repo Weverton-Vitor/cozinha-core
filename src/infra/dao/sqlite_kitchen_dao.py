@@ -1,5 +1,5 @@
 import sqlite3
-from dao import interfaces
+from infra.dao import interfaces
 from infra import exceptions
 from business import entities
 
@@ -19,6 +19,7 @@ class SQLiteKitchenDAO(interfaces.IKitchenDAO):
         self.kitchen_class = kitchen_class
         self.fields = fields
         self.conn = None
+        self.cursor = None
         self.connect()
         self._initialize_db()
         self.close()
@@ -37,6 +38,7 @@ class SQLiteKitchenDAO(interfaces.IKitchenDAO):
     def connect(self):
         try:
             self.conn = sqlite3.connect(self.db_path)
+            self.cursor = self.conn.cursor()
         except Exception as e:
             raise exceptions.PersistenceException(f"Failed to connect to database: {e}")
 

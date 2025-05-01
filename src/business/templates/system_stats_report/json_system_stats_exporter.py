@@ -1,7 +1,7 @@
 import json
-from infra import templates
+from business import templates
 
-class JsonSystemStatsExporter(templates.interfaces.SystemStatsReportExporter):
+class JsonSystemStatsExporter(templates.ISystemStatsReportExporter):
     def preparar_dados(self, dados):
         self.dados_json = json.dumps(dados, indent=4)
 

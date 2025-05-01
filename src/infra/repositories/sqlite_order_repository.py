@@ -1,11 +1,10 @@
 from business import entities
 from infra import repositories
-from infra.factories.sqlite_dao_factory import SQLIteDAOFactory
+from infra.dao import IOrderDAO
 
 class SQLiteOrderRepository(repositories.interfaces.IOrderRepository):
-    def __init__(self):
-        dao_factory = SQLIteDAOFactory()
-        self.order_dao = dao_factory.get_order_dao()
+    def __init__(self, order_dao: IOrderDAO):
+        self.order_dao = order_dao
 
     def create(self, order: entities.Order) -> None:
         self.order_dao.create(order)
