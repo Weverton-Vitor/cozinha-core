@@ -9,18 +9,11 @@ class OrderView:
     def __init__(self, controller_order: controllers.OrderController):
         self.__controller_order = controller_order
 
-    def create_order(
-        self,
-        id: str,
-        products: list[entities.Product]
-    ):
-        self.__controller_order.create_order(
-            id, products
-        )
+    def create_order(self, id, products: list[entities.Product]):
+        self.__controller_order.create_order(id, products)
 
-    # TODO
-    def update_order(self):
-        pass
+    def update_order(self, id, products: list[entities.Product]):
+        self.__controller_order.update_order(id, products)
 
     def display_orders(self):
         orders = self.__controller_order.get_orders()
@@ -35,7 +28,7 @@ class OrderView:
     def get_order(self, id: str):
         command = commands.GetOrderCommand(id)
         self.__controller_order.set_command(command)
-        self.__controller_order.execute_command()
+        return self.__controller_order.execute_command()
 
     def show_message(self, message: str):
         print(message)
