@@ -1,7 +1,7 @@
 from flask import Flask
 from sys import argv
 
-from views import kitchen_bp, supplier_bp
+from routes import kitchen_bp, supplier_bp
 
 app = Flask(__name__)
 app.register_blueprint(kitchen_bp, url_prefix="/kitchens")

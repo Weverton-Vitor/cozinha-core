@@ -1,8 +1,5 @@
 from builders.view_builder import IViewBuilder
-from business.decorators import singleton
 
-
-@singleton
 class ViewDirector:
     __builder: IViewBuilder
 

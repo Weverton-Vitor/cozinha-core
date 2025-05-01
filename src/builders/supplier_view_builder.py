@@ -1,6 +1,8 @@
 from business.controllers import SupplierController
 from business.services import SuppliersService
 from business.validators import IPasswordValidator, IUsernameValidator
+from logger.python_logging_adapter import PythonLoggerAdapter
+from logger.logger_adapter import LoggerAdapter
 
 from business.validators.password_validator import PasswordValidator
 from business.validators.username_validator import UsernameValidator
@@ -22,6 +24,7 @@ class SupplierViewBuilder(IViewBuilder):
     __repository: ISupplierRepository = None
     __service: SuppliersService = None
     __controller: SupplierController = None
+    __logger: LoggerAdapter = None
 
     __view: SupplierView = None
 
@@ -35,8 +38,9 @@ class SupplierViewBuilder(IViewBuilder):
         self.__view = None
 
     def build_controller(self):
+        self.__logger = PythonLoggerAdapter()
         self.__controller = SupplierController(
-            self.__service, self.__repository)
+            self.__service, self.__repository, self.__logger)
 
     def build_DAO(self):
         self.__dao = SQLIteDAOFactory().get_supplier_dao()
@@ -45,13 +49,15 @@ class SupplierViewBuilder(IViewBuilder):
         self.__repository = SQLiteRepositoryFactory().get_supplier_repository(self.__dao)
 
     def build_service(self):
-        self.__service = SuppliersService(self.__username_validator, self.__password_validator)
+        self.__service = SuppliersService(
+            self.__username_validator, self.__password_validator)
 
     def build_validators(self):
         self.__password_validator = UsernameValidator()
         self.__username_validator = PasswordValidator()
 
     def build_view(self):
+        print("construir")
         self.__view = SupplierView(self.__controller)
 
     def get_product(self):

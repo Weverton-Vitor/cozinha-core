@@ -3,8 +3,10 @@ from infra.repositories.in_memory_kitchen_repository import InMemoryKitchenRepos
 from infra.repositories.in_memory_supplier_repository import InMemorySuppliersRepository
 from infra.repositories.in_memory_product_repository import InMemoryProductRepository
 from infra.repositories.sqlite_kitchen_repository import SQLiteKitchenRepository
+from infra.repositories.sqlite_order_repository import SQLiteOrderRepository
 from infra.repositories.sqlite_supplier_repository import SQLiteSupplierRepository
 from infra.repositories.sqlite_product_repository import SQLiteProductRepository
+from . import interfaces
 
 __all__ = [
     IKitchenRepository, ISupplierRepository, IProductRepository, IOrderRepository,
@@ -13,5 +15,7 @@ __all__ = [
     InMemoryProductRepository,
     SQLiteKitchenRepository,
     SQLiteSupplierRepository,
-    SQLiteProductRepository
+    SQLiteProductRepository,
+    SQLiteOrderRepository,
+    interfaces,
 ]

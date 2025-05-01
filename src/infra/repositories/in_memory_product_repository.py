@@ -3,7 +3,7 @@ from infra import factories
 from infra.repositories import interfaces
 
 
-class InMemoryProductRepository(interfaces.IproductRepository):
+class InMemoryProductRepository(interfaces.IProductRepository):
     def __init__(self):
         dao_factory = factories.ArrayDAOFactory()
         self.product_dao = dao_factory.get_product_dao()

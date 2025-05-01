@@ -12,7 +12,7 @@ class OrderView:
     def create_order(
         self,
         id: str,
-        products: list[entities.Products]
+        products: list[entities.Product]
     ):
         self.__controller_order.create_order(
             id, products
