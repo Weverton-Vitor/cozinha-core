@@ -16,7 +16,7 @@ class ProductController:
         self.__repository = repository
         self.__logger = logger
 
-    def create_product(self, product_id: str, name: str, unit: str, stock: float = 0):
+    def add_product(self, product_id: str, name: str, unit: str, stock: float = 0):
         try:
             if stock < 0:
                 self.__logger.log_error("Estoque não pode ser negativo")
@@ -58,7 +58,7 @@ class ProductController:
         except exceptions.LookupException as e:
             self.__logger.log_error(f"Produto não encontrado: {e}")
 
-    def get_all_products(self):
+    def get_products(self):
         try:
             return self.__repository.getAll()
         except exceptions.PersistenceException as e:
