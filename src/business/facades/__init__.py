@@ -1,5 +1,5 @@
-from .report_faca_sing_controller import KitchenSupplierFacade
+from .report_faca_sing_controller import ReportFacade
 
 __all__ = [
-    KitchenSupplierFacade,
+    ReportFacade,
 ]

@@ -10,3 +10,9 @@ class SQLIteDAOFactory(factories.IDAOFactory):
 
     def get_kitchen_dao(self) -> dao.IKitchenDAO:
         return dao.SQLiteKitchenDAO("./data/database.db", "kitchens", Kitchen, ["name", "user_name", "password", "address", "phone_number", "email", "created_at"])
+    
+    def get_product_dao(self) -> dao.interfaces.IProductDAO:
+        return dao.SQLiteProductDAO()
+
+    def get_order_dao(self) -> dao.interfaces.IOrderDAO:
+        return dao.SQLiteOrderDAO()

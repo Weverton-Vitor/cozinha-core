@@ -54,13 +54,12 @@ class KitchenView:
     def show_message(self, message: str):
         print(message)
 
+    def genereate_report(self, report_facade: facades.ReportFacade):    
+        return report_facade.report()
+    
     # TODO
     def remove_kitchen(self):
         return {"to": "do"}
-
-    # TODO
-    def genereate_report(self, report_facade: facades.KitchenSupplierFacade):
-        return report_facade.report()
 
 
 kitchen_view_builder = KitchenViewBuilder()

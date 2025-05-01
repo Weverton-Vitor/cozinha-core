@@ -10,3 +10,7 @@ class IRepositoryFactory(ABC):
     @abstractmethod
     def get_kitchen_repository(self, kithcen_dao) -> repositories.interfaces.IKitchenRepository:
         pass
+
+    @abstractmethod
+    def get_order_repository(self) -> repositories.interfaces.IOrderRepository:
+        pass

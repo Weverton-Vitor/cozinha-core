@@ -6,11 +6,12 @@ import logger
 
 
 @singleton
-class KitchenSupplierFacade:
+class ReportFacade:
     def __init__(
         self,
         supplier_repo: repositories.interfaces.ISupplierRepository,
         kitchen_repo: repositories.interfaces.IKitchenRepository,
+        product_repo: repositories.interfaces.IProductRepository,
         report: templates.ISystemStatsReportExporter
     ):
         supplier_service = services.SuppliersService(
@@ -23,11 +24,13 @@ class KitchenSupplierFacade:
                                                                   supplier_repo, 
                                                                   logger_)
         self.kitchen_controller = controllers.KitchenController(kitchen_repo)
+        self.product_controller = controllers.ProductController(product_repo)
         self._report = report
 
     def report(self, path_to_save) -> str:
-        """Gera um relatório consolidado de fornecedores e cozinhas no formato JSON."""
+        """Gera um relatório consolidado de fornecedores, cozinhas e produtos no formato JSON."""
         suppliers = self.supplier_controller.get_suppliers() or []
         kitchens = self.kitchen_controller.get_kitchens() or []
+        products = self.product_controller.get_products() or []
 
-        self._report.exportar(suppliers + kitchens, path_to_save)
+        self._report.exportar(suppliers + kitchens + products, path_to_save)
