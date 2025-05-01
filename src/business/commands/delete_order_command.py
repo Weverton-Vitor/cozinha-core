@@ -1,11 +1,10 @@
 from business.commands import Command
+from infra import repositories
 
 class DeleteOrderCommand(Command):
     def __init__(id: str):
-        return 
+        super().__init__(id) 
     
-    def execute():
-        return
+    def execute(self, repository: repositories.IOrderRepository):
+        repository.delete(self.__id)
     
-    def undo():
-        return
