@@ -34,5 +34,6 @@ class ReportFacade:
         suppliers = self.supplier_controller.get_suppliers() or []
         kitchens = self.kitchen_controller.get_kitchens() or []
         products = self.product_controller.get_products() or []
+        orders = self.order_controller.get_orders() or []
 
-        self._report.exportar(suppliers + kitchens + products, path_to_save)
+        self._report.exportar(suppliers + kitchens + products + orders, path_to_save)
