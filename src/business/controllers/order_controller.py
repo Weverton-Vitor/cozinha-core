@@ -18,18 +18,18 @@ class OrderController:
             self.__repository = repository
         self.__command = command
 
-def set_command(self, command: commands.Command):
-    self.__command = command
+    def set_command(self, command: commands.Command):
+        self.__command = command
 
-def execute_command(self):
-    self.__command.execute(self.__repository)
+    def execute_command(self):
+        self.__command.execute(self.__repository)
 
-def create_order(self, id, products):
-    order = entities.Order(id, products)
-    self.__repository.create(order)
+    def create_order(self, id, products):
+        order = entities.Order(id, products)
+        self.__repository.create(order)
 
-def update_order(self, id: str, products: list[entities.Product]):
-    self.__repository.update(id, products)
-                
-def get_orders(self):
-    return self.__repository.getAll()
+    def update_order(self, id: str, products: list[entities.Product]):
+        self.__repository.update(id, products)
+                    
+    def get_orders(self):
+        return self.__repository.getAll()
