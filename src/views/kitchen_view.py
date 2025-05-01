@@ -28,7 +28,7 @@ class KitchenView:
     def show_message(self, message: str):
         print(message)
 
-    def genereate_report(self, report_facade: facades.KitchenSupplierFacade):    
+    def genereate_report(self, report_facade: facades.ReportFacade):    
         return report_facade.report()
     
 
