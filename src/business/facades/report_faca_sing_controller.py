@@ -11,7 +11,7 @@ class KitchenSupplierFacade:
         self,
         supplier_repo: repositories.interfaces.ISupplierRepository,
         kitchen_repo: repositories.interfaces.IKitchenRepository,
-        report: templates.SystemStatsReportExporter
+        report: templates.ISystemStatsReportExporter
     ):
         supplier_service = services.SuppliersService(
             validators.UsernameValidator(),

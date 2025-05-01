@@ -1,6 +1,6 @@
 from typing import List
 from business import entities
-from dao import interfaces
+from infra.dao import interfaces
 
 
 class ArraySupplierDAO(interfaces.ISupplierDAO):
