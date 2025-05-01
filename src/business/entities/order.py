@@ -1,11 +1,11 @@
-import Products
+from business import entities
 from business.memento import order_memento
 
 class Order:
     __id: str
-    __products: list[Products]
+    __products: list[entities.Product]
 
-    def __init__(self, id: str, products: list[Products]):
+    def __init__(self, id: str, products: list[entities.Product]):
         self.__id = id
         self.__products = products
 
@@ -15,7 +15,7 @@ class Order:
     def get_id(self):
         return self.__id
 
-    def set_products(self, products: list[Products]):
+    def set_products(self, products: list[entities.Product]):
         self.__products = products
 
     def get_products(self):
