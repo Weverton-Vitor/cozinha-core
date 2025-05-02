@@ -16,6 +16,8 @@ product_bp.add_url_rule(
 product_bp.add_url_rule(
     '/', view_func=product_view.update_product, methods=['PUT'])
 product_bp.add_url_rule(
-    '/', view_func=product_view.remove_product, methods=['DELETE'])
+    '/<name>', view_func=product_view.remove_product, methods=['DELETE'])
+product_bp.add_url_rule(
+    '/<name>', view_func=product_view.get_product, methods=['GET'])
 product_bp.add_url_rule(
     '/', view_func=product_view.display_products, methods=['GET'])

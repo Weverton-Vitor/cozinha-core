@@ -45,6 +45,15 @@ class ProductView:
         for product in products:
             print(product)
 
+    def get_product(self, name):
+
+        success, result = self.__controller.get_product(name)
+
+        if not success:
+            return {"success": False, "message": result}, 400
+
+        return {"success": True, "product": result.to_json() if result else None}, 200
+
     def show_message(self, message: str):
         print(message)
 
