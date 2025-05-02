@@ -36,6 +36,14 @@ class Product(EventListener):
     def set_unit(self, unit: str):
         self.__unit = unit
 
+    def to_json(self):
+        return {
+            "product_id": self.__product_id,
+            "name": self.__name,
+            "stock": self.__stock,
+            "unit": self.__unit
+        }
+
     def update(self, data: dict):
         """Recebe notificações do dispatcher"""
         if data.get("product_id") == self.__product_id:

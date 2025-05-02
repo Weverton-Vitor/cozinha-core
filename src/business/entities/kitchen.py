@@ -56,6 +56,17 @@ class Kitchen:
 
     def get_created_at(self):
         return self.__created_at
+    
+    def to_json(self):
+        return {
+            "name": self.__name,
+            "user_name": self.__user_name,
+            "password": self.__password,
+            "address": self.__address,
+            "phone_number": self.__phone_number,
+            "email": self.__email,
+            "created_at": self.__created_at.isoformat()
+        }
 
     def __str__(self):
         return f"Kitchen {{ Name: {self.__name}, Address: {self.__address} }}"

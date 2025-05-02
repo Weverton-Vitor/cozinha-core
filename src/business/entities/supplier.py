@@ -18,9 +18,9 @@ class Supplier:
     def set_password(self, password: str):
         self.__password = password
 
-    def toJSON(self):
+    def to_json(self):
         return {
-            "username": self.__username,
+            "name": self.__name,
             "password": self.__password
         }
 

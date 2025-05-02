@@ -4,6 +4,10 @@ from business.decorators import singleton
 
 # TODO - Implementar a classe KitchensService
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 0108c81ad7b509c374067e64b1d239f54dca0fc4
 class KitchensService:
     __username_validator: validators.IUsernameValidator
     __password_validator: validators.IPasswordValidator
