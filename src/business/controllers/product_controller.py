@@ -38,7 +38,7 @@ class ProductController:
     def update_product(self, identifier: str, product_dict: dict ):
         try:
             product = entities.Product(**product_dict)
-            # Pode ser útil obter o produto antigo para comparação
+
             old_product = self.__repository.get(identifier=identifier)
             old_stock = old_product.get_stock() if old_product else None
             
@@ -59,11 +59,15 @@ class ProductController:
                     "old_stock": old_stock,
                     "new_stock": product.get_stock()
                 })
+
+            return product
                 
         except exceptions.PersistenceException as e:
             self.__logger.log_error(f"Erro de persistência: {e}")
+            return f"Erro de persistência: {e}"
         except exceptions.LookupException as e:
             self.__logger.log_error(f"Produto não encontrado: {e}")
+            return f"Produto não encontrado: {e}"
 
 
     def delete_product(self, identifier: str) -> entities.Product:
@@ -80,8 +84,10 @@ class ProductController:
             return product
         except exceptions.DeleteException as e:
             self.__logger.log_error(f"Erro ao excluir produto: {e}")
+            return f"Erro ao excluir produto: {e}"
         except exceptions.LookupException as e:
             self.__logger.log_error(f"Produto não encontrado: {e}")
+            return f"Produto não encontrado: {e}"
 
     def get_product(self, identifier: str) -> entities.Product:
         try:
