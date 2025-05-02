@@ -78,4 +78,4 @@ class KitchenView:
         if not success:
             return {"success": False, "message": result}, 400
 
-        return {"success": True, "kitchen": result.to_json()}, 200
+        return {"success": True, "kitchen": result.to_json() if result else None}, 200
