@@ -18,7 +18,7 @@ kitchen_bp.add_url_rule(
 kitchen_bp.add_url_rule(
     '/<name>', view_func=kitchen_view.remove_kitchen, methods=['DELETE'])
 kitchen_bp.add_url_rule(
-    '/<name>', view_func=kitchen_view.display_kitchens, methods=['GET'])
+    '/<name>', view_func=kitchen_view.get_kitchen, methods=['GET'])
 kitchen_bp.add_url_rule(
     '/', view_func=kitchen_view.display_kitchens, methods=['GET'])
 kitchen_bp.add_url_rule(
