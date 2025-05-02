@@ -18,7 +18,7 @@ class SupplierView:
         if not success:
             return {"success": success, "message": result}, 400
 
-        return {"success": success, "supplier": result.toJSON()}, 201
+        return {"success": success, "supplier": result.to_json()}, 201
 
     def display_suppliers(self):
         success, result = self.__controller.get_suppliers()
@@ -26,7 +26,7 @@ class SupplierView:
         if not success:
             return {"success": success, "message": result}, 400
 
-        suppliers = [s.toJSON() for s in result]
+        suppliers = [s.to_json() for s in result]
 
         return {"success": True, "suppliers": suppliers}, 200
 
@@ -44,7 +44,7 @@ class SupplierView:
         if not success:
             return {"success": success, "message": result}, 400
 
-        return {"success": True, "supplier": result.toJSON()}, 200
+        return {"success": True, "supplier": result.to_json()}, 200
 
     def remove_supplier(self, username):
         success, result = self.__controller.delete_supplier(username)
@@ -52,7 +52,7 @@ class SupplierView:
         if not success:
             return {"success": False, "message": result}, 400
 
-        return {"success": True, "supplier": result.toJSON()}, 200
+        return {"success": True, "supplier": result.to_json()}, 200
 
     def get_supplier(self, username):
 
@@ -61,7 +61,7 @@ class SupplierView:
         if not success:
             return {"success": success, "message": result}, 400
 
-        return {"success": True, "supplier": result.toJSON()}, 200
+        return {"success": True, "supplier": result.to_json()}, 200
 
     def show_message(self, message: str):
         print(message)
