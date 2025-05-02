@@ -29,5 +29,11 @@ class Order:
         self.__id = memento.get_id()
         self.__products = memento.get_products()
 
+    def to_json(self):
+        return {
+            "id": self.__id,
+            "products": [product.to_json() for product in self.__products]
+        }
+
     def __str__(self):
         return f"Order {{ Id: {self.__id}}}"

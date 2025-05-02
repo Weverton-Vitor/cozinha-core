@@ -18,5 +18,11 @@ class Supplier:
     def set_password(self, password: str):
         self.__password = password
 
+    def to_json(self):
+        return {
+            "name": self.__name,
+            "password": self.__password
+        }
+
     def __str__(self):
         return f"Supplier {{ {self.__name} }}"
