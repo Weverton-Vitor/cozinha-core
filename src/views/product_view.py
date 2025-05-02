@@ -10,8 +10,8 @@ class ProductView:
     def __init__(self, controller: controllers.ProductController):
         self.__controller = controller
 
-    def create_product(self, product_id: str, name: str, stock: float, unit: str):
-        self.__controller.add_product(product_id, name, stock, unit)
+    def create_product(self, name: str, stock: float, unit: str):
+        self.__controller.add_product(str(uuid.uuid4()), name, stock, unit)
 
     def update_product(self):
         data = flask.request.get_json()
@@ -19,12 +19,15 @@ class ProductView:
         stock = float(data.get("stock", None))
         unit = str(data.get("unit", None))
 
+        product = {
+            "name": name,
+            "stock": stock,
+            "unit": unit
+        }
+        
+        result = self.__controller.update_product(name, product)
 
-        success, result = self.__controller.add_product(
-            product_id=str(uuid.uuid4()), name=name, stock=stock, unit=unit
-        )
-
-        if not success:
+        if not result:
             return {"success": False, "message": result}, 400
 
         return {"success": True, "product": result}, 201
