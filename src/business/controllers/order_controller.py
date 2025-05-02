@@ -1,6 +1,7 @@
 from business import entities
 from infra import repositories
 from business import commands
+from infra.exceptions.persistence_exception import PersistenceException
 
 
 class OrderController:
@@ -24,12 +25,30 @@ class OrderController:
     def execute_command(self):
         self.__command.execute(self.__repository)
 
-    def create_order(self, id, products):
-        order = entities.Order(id, products)
-        self.__repository.create(order)
+    def get_order(self, id):
+        try:
+            return True, self.__repository.get(id)
+        except LookupError as e:
+            return False, f"{e}"
 
-    def update_order(self, id: str, products: list[entities.Product]):
-        self.__repository.update(id, products)
-                    
+    def create_order(self, id, products: list[dict]):
+        try:
+            order = entities.Order(
+                id, [entities.Product(**p) for p in products])
+            self.__repository.create(order)
+            return True, order
+
+        except PersistenceException as e:
+            return False, f"Erros de persistência: {e}"
+
+    def update_order(self, id: str, products: list[dict]):
+        try:
+            order = entities.Order(
+                id, [entities.Product(**p) for p in products])
+            self.__repository.update(id, order)
+            return True, order
+        except PersistenceException as e:
+            return False, f"Erros de persistência: {e}"
+
     def get_orders(self):
-        return self.__repository.getAll()
+        return True, self.__repository.getAll()
