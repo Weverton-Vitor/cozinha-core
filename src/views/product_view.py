@@ -19,12 +19,15 @@ class ProductView:
         stock = float(data.get("stock", None))
         unit = str(data.get("unit", None))
 
+        product = {
+            "name": name,
+            "stock": stock,
+            "unit": unit
+        }
+        
+        result = self.__controller.update_product(name, product)
 
-        success, result = self.__controller.update_product(
-            name=name, stock=stock, unit=unit
-        )
-
-        if not success:
+        if not result:
             return {"success": False, "message": result}, 400
 
         return {"success": True, "product": result}, 201

@@ -35,8 +35,9 @@ class ProductController:
         except exceptions.PersistenceException as e:
             self.__logger.log_error(f"Erro de persistência: {e}")
 
-    def update_product(self, identifier: str, product: entities.Product):
+    def update_product(self, identifier: str, product_dict: dict ):
         try:
+            product = entities.Product(**product_dict)
             # Pode ser útil obter o produto antigo para comparação
             old_product = self.__repository.get(identifier=identifier)
             old_stock = old_product.get_stock() if old_product else None
