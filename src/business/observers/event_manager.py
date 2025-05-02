@@ -1,7 +1,8 @@
 from typing import Any, Dict, List
 from business import observers
+from business.decorators import singleton
 
-
+@singleton
 class EventManager:
     """Gerenciador de eventos que mantém os assinantes e os notifica quando eventos ocorrem"""
 

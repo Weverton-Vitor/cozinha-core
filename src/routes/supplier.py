@@ -14,8 +14,10 @@ print(supplier_view)
 supplier_bp.add_url_rule(
     '/', view_func=supplier_view.create_supplier, methods=['POST'])
 supplier_bp.add_url_rule(
-    '/', view_func=supplier_view.update_supplier, methods=['PUT'])
+    '/<username>', view_func=supplier_view.update_supplier, methods=['PUT'])
 supplier_bp.add_url_rule(
-    '/', view_func=supplier_view.remove_supplier, methods=['DELETE'])
+    '/<username>', view_func=supplier_view.remove_supplier, methods=['DELETE'])
+supplier_bp.add_url_rule(
+    '/<username>', view_func=supplier_view.get_supplier, methods=['GET'])
 supplier_bp.add_url_rule(
     '/', view_func=supplier_view.display_suppliers, methods=['GET'])

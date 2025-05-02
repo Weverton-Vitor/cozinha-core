@@ -42,13 +42,13 @@ class KitchenController:
                     name, password, user_name, address, phone_number, email
                 )
                 self.__repository.create(kitchen)
+                return True, kitchen
         except business.exceptions.InvalidUsernameException as e:
-            return f"Erro de nome de usuário: {e}"
-
+            return False, f"Erro de nome de usuário: {e}"
         except business.exceptions.InvalidPasswordException as e:
-            return f"Erro de senha: {e}"
+            return False, f"Erro de senha: {e}"
         except infra.exceptions.PersistenceException as e:
-            return f"Erro de persistência: {e}"
+            return False, f"Erro de persistência: {e}"
 
     def update_kitchen(self, identifier: str, kitchen_dict: dict):
         kitchen = entities.Kitchen(**kitchen_dict)

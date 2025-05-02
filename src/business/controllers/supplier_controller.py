@@ -1,7 +1,8 @@
 from business import services
 from business import entities
 from infra import repositories
-from infra import exceptions
+from infra.exceptions import PersistenceException, LookupException, DeleteException
+from business.exceptions import InvalidPasswordException, InvalidUsernameException
 import logger
 
 
@@ -26,33 +27,38 @@ class SupplierController:
                 sup = entities.Supplier(name, password)
                 self.__repository.create(sup)
                 self.__logger.log_info(f"{sup} created")
-        except exceptions.InvalidUsernameException as e:
-            self.__logger.log_error(f"Erro de nome de usuário: {e}")
-        except exceptions.InvalidPasswordException as e:
-            self.__logger.log_error(f"Erro de senha: {e}")
-        except exceptions.PersistenceException as e:
-            self.__logger.log_error(f"Erro de persistência: {e}")
+                return True, sup
+        except InvalidUsernameException as e:
+            return False, f"Erro de nome de usuário: {e}"
+        except InvalidPasswordException as e:
+            return False, f"Erro de senha: {e}"
+        except PersistenceException as e:
+            return False, f"Erro de persistência: {e}"
 
-    def update_supplier(self, identifier: str, supplier: entities.Supplier):
+    def update_supplier(self, username: str, supplier_dict: dict):
+        supplier = entities.Supplier(**supplier_dict)
         try:
-            self.__repository.update(identifier=identifier, item=supplier)
-        except exceptions.PersistenceException as e:
-            self.__logger.log_error(f"Erro de persistência: {e}")
+            self.__repository.update(username=username, supplier=supplier)
+            return True, supplier
+        except PersistenceException as e:
+            return False, f"Erro de persistência: {e}"
 
-    def get_supplier(self, identifier: str) -> entities.Supplier:
+    def get_supplier(self, username: str) -> tuple[bool, entities.Supplier | str]:
         try:
-            return self.__repository.get(identifier=identifier)
-        except exceptions.LookupException as e:
+            return True, self.__repository.get(username=username)
+        except LookupException as e:
             self.__logger.log_error(f"Erro de persistência: {e}")
+            return False, f"Erro de persistência: {e}"
 
-    def delete_supplier(self, identifier: str) -> entities.Supplier:
+    def delete_supplier(self, username: str) -> tuple[bool, entities.Supplier | str]:
         try:
-            return self.__repository.delete(identifier=identifier)
-        except exceptions.DeleteException as e:
-            self.__logger.log_error(f"Erro de persistência: {e}")
+            return True, self.__repository.delete(username=username)
+        except DeleteException as e:
+            return False, f"Erro de persistência: {e}"
 
     def get_suppliers(self):
         try:
-            return self.__repository.getAll()
-        except exceptions.PersistenceException as e:
+            return True, self.__repository.getAll()
+        except PersistenceException as e:
             self.__logger.log_error(f"Erro de persistência: {e}")
+            return False, f"Erro de persistência: {e}"

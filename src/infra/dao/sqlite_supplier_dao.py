@@ -36,7 +36,7 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
             self.conn.commit()
         except Exception as e:
             self.logger.log_error(f"{e}")
-            raise exceptions.PersistenceException()
+            raise exceptions.PersistenceException(f"{e}")
         finally:
             self.close()
 
@@ -65,8 +65,8 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
                 values,
             )
             self.conn.commit()
-        except Exception:
-            raise exceptions.PersistenceException()
+        except Exception as e:
+            raise exceptions.PersistenceException(f"{e}")
         finally:
             self.close()
 
@@ -76,8 +76,8 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
             self.query(
                 f"DELETE FROM {self.table_name} WHERE name = ?", (name,))
             self.conn.commit()
-        except Exception:
-            raise exceptions.PersistenceException()
+        except Exception as e:
+            raise exceptions.PersistenceException(f"{e}")
         finally:
             self.close()
 
@@ -85,16 +85,17 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
         try:
             self.connect()
             set_clause = ", ".join(
-                [f"{field} = ?" for field in self.fields[1:-1]])
+                [f"{field} = ?" for field in self.fields[1:]])
             values = [
-                getattr(supplier, f"get_{field}")() for field in self.fields[1:-1]
+                getattr(supplier, f"get_{field}")() for field in self.fields[1:]
             ] + [name]
+            
             self.query(
                 f"UPDATE {self.table_name} SET {set_clause} WHERE name = ?", values
             )
             self.conn.commit()
-        except Exception:
-            raise exceptions.PersistenceException()
+        except Exception as e:
+            raise exceptions.PersistenceException(f"{e}")
         finally:
             self.close()
 
@@ -104,8 +105,8 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
             row = self.query(
                 f"SELECT * FROM {self.table_name} WHERE name = ?", (name,))
             return self.supplier_class(*row[0]) if row else None
-        except Exception:
-            raise exceptions.PersistenceException()
+        except Exception as e:
+            raise exceptions.PersistenceException(f"{e}")
         finally:
             self.close()
 
@@ -113,9 +114,10 @@ class SQLiteSupplierDAO(interfaces.ISupplierDAO):
         try:
             self.connect()
             rows = self.query(f"SELECT * FROM {self.table_name}")
+            print(rows)
             return [self.supplier_class(*row) for row in rows]
-        except Exception:
-            raise exceptions.PersistenceException()
+        except Exception as e:
+            raise exceptions.PersistenceException(f"{e}")
         finally:
             self.close()
 

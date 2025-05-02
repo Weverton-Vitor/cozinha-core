@@ -17,11 +17,11 @@ class KitchenView:
         phone_number = str(data.get("phone_number", None))
         email = str(data.get("email", None))
 
-        result = self.__controller_kitchen.add_kitchen(
+        success, result = self.__controller_kitchen.add_kitchen(
             name, password, user_name, address, phone_number, email
         )
 
-        if result:
+        if not success:
             return {"success": False, "message": result}, 400
 
         return {"success": True, "kitchen": result}, 201
@@ -57,7 +57,7 @@ class KitchenView:
         return {"success": "True", "report": report_facade.report()}, 200
 
     def remove_kitchen(self):
-        data = flask.request.get_json()
+        data = flask.request.g()
         name = str(data.get("name", None))
 
         result = self.__controller_kitchen.delete_kitchen(name)

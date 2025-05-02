@@ -1,3 +1,4 @@
+import flask
 from business import controllers
 
 
@@ -7,19 +8,60 @@ class SupplierView:
     def __init__(self, controller: controllers.SupplierController):
         self.__controller = controller
 
-    def create_supplier(self, name: str, password: str):
-        self.__controller.add_supplier(name, password)
+    def create_supplier(self):
+        data = flask.request.get_json()
+        username = data.get("username", None)
+        password = data.get("password", None)
+
+        success, result = self.__controller.add_supplier(username, password)
+
+        if not success:
+            return {"success": success, "message": result}, 400
+
+        return {"success": success, "supplier": result.toJSON()}, 201
 
     def display_suppliers(self):
-        suppliers = self.__controller.get_suppliers()
-        for supplier in suppliers:
-            print(supplier)
+        success, result = self.__controller.get_suppliers()
 
-    def update_supplier(self):
-        pass
+        if not success:
+            return {"success": success, "message": result}, 400
 
-    def remove_supplier(self):
-        pass
+        suppliers = [s.toJSON() for s in result]
+
+        return {"success": True, "suppliers": suppliers}, 200
+
+    def update_supplier(self, username):
+        print(username)
+        data = flask.request.get_json()
+
+        supplier = {
+            "username": username,
+            "password": data.get("password", None)
+        }
+
+        success, result = self.__controller.update_supplier(username, supplier)
+
+        if not success:
+            return {"success": success, "message": result}, 400
+
+        return {"success": True, "supplier": result.toJSON()}, 200
+
+    def remove_supplier(self, username):
+        success, result = self.__controller.delete_supplier(username)
+
+        if not success:
+            return {"success": False, "message": result}, 400
+
+        return {"success": True, "supplier": result.toJSON()}, 200
+
+    def get_supplier(self, username):
+
+        success, result = self.__controller.get_supplier(username)
+
+        if not success:
+            return {"success": success, "message": result}, 400
+
+        return {"success": True, "supplier": result.toJSON()}, 200
 
     def show_message(self, message: str):
         print(message)

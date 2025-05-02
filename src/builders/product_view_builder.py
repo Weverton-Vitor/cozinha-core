@@ -1,4 +1,5 @@
 from business.controllers import ProductController
+from business.observers.event_manager import EventManager
 from logger import LoggerAdapter, PythonLoggerAdapter
 # from business.services import ProductsService
 
@@ -18,20 +19,22 @@ class ProductViewBuilder(IViewBuilder):
     # __service: ProductsService = None
     __controller: ProductController = None
     __logger: LoggerAdapter = None
+    __eventmanager: EventManager = None
 
     __view: ProductView = None
 
     def reset(self):
         self.__dao = None
         self.__repository = None
-        self.__service = None
+        self.__eventmanager = None
         self.__controller = None
         self.__view = None
 
     def build_controller(self):
         self.__logger = PythonLoggerAdapter()
+        self.__eventmanager = EventManager()
         self.__controller = ProductController(
-            self.__repository, self.__logger)
+            self.__repository, self.__logger, self.__eventmanager)
 
     def build_DAO(self):
         self.__dao = SQLIteDAOFactory().get_kitchen_dao()
